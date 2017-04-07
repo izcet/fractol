@@ -1,28 +1,27 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   set_xyzcp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/04 19:11:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/04/04 19:11:40 by irhett           ###   ########.fr       */
+/*   Created: 2017/03/11 00:34:31 by irhett            #+#    #+#             */
+/*   Updated: 2017/03/11 00:38:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "mgl.h"
 
-# include "mlx.h"
-# include "libft.h"
-# include <math.h>
+#define P (*p)
 
-typedef struct		s_color
+void	set_xyzcp(t_xyzcp *p, float x, float y, float z)
 {
-	unsigned char	a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_col;
-
-
-#endif
+	if (p)
+	{
+		P.x = x;
+		P.y = y;
+		P.z = z;
+	}
+	else
+		ft_error("NULL passed to set_xyzcp()");
+}

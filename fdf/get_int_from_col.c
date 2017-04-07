@@ -1,28 +1,20 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   get_int_from_col.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/04 19:11:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/04/04 19:11:40 by irhett           ###   ########.fr       */
+/*   Created: 2017/03/02 14:13:51 by irhett            #+#    #+#             */
+/*   Updated: 2017/03/04 17:11:19 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "mgl.h"
 
-# include "mlx.h"
-# include "libft.h"
-# include <math.h>
+#define C (*c)
 
-typedef struct		s_color
+unsigned int	get_int_from_col(t_col *c)
 {
-	unsigned char	a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_col;
-
-
-#endif
+	return (get_int_from_chars(C.a, C.r, C.g, C.b));
+}

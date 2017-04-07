@@ -1,28 +1,26 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/04 19:11:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/04/04 19:11:40 by irhett           ###   ########.fr       */
+/*   Created: 2017/02/25 22:17:59 by irhett            #+#    #+#             */
+/*   Updated: 2017/02/27 03:26:20 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "mgl.h"
 
-# include "mlx.h"
-# include "libft.h"
-# include <math.h>
+#define W (*win)
+#define D (*W.data)
 
-typedef struct		s_color
+int		loop_hook(void *param)
 {
-	unsigned char	a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_col;
+	t_win	*win;
 
-
-#endif
+	win = (t_win*)param;
+	mlx_clear_window(D.mlx, W.ptr);
+	draw_grid(win);
+	return (0);
+}

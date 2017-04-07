@@ -1,28 +1,28 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   set_data_xy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/04 19:11:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/04/04 19:11:40 by irhett           ###   ########.fr       */
+/*   Created: 2017/03/02 19:20:33 by irhett            #+#    #+#             */
+/*   Updated: 2017/03/02 19:22:47 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "mgl.h"
 
-# include "mlx.h"
-# include "libft.h"
-# include <math.h>
+#define D (*data)
+#define P (*p)
 
-typedef struct		s_color
+void	set_data_xy(t_data *data, t_xyp *p)
 {
-	unsigned char	a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_col;
-
-
-#endif
+	if (data && p)
+	{
+		D.wid = P.x;
+		D.len = P.y;
+		del_xyp(p);
+	}
+	else
+		ft_error("NULL parameter(s) passed to set_data_xy()");
+}
