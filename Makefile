@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 17:39:00 by irhett            #+#    #+#              #
-#    Updated: 2017/04/06 17:45:11 by irhett           ###   ########.fr        #
+#    Updated: 2017/04/06 18:24:22 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,7 @@ XFLAGS		=	-L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
-SRC_FILE	=	main.c \
-				code.c \
-				etc.c
+SRC_FILE	=	main.c
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj
