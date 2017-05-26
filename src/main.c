@@ -6,50 +6,69 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/04/06 18:24:37 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/25 23:05:32 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define NUM_FRACTALS 6
-
-void	available_fractals(void)
+static void	available_fractals(void)
 {
 	int		i;
 
 	ft_putendl("The available fractals are:");
 	ft_putendl(" - mandelbrot");
-	ft_putendl(" - julia");
+/*	ft_putendl(" - julia");
 	ft_putendl(" - serpinski");
-	ft_putendl(" - apollonian");
+	ft_putendl(" - apollonian"); // curves/circles?
 	ft_putendl(" - dragon");
-	ft_putendl(" - pinwheel");
+	ft_putendl(" - pinwheel");*/
 }
 
-void	fractol_error(char *str)
+static void	fractol_error(char *str)
 {
 	ft_putstr_fd("Error: \"", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\" is not a valid fractal.\n");
-	available_fractals();
 }
 
-int		main(int argc, char **argv)
+static int	is_valid(char *str)
+{
+	if (equals(str, "mandelbrot"))
+		return (1);
+	/*	if (equals(str, "julia"))
+		return (1);
+		if (equals(str, "serpinski"))
+		return (1);
+		if (equals(str, "apollonian"))
+		return (1);
+		if (equals(str, "dragon"))
+		return (1);
+		if (equals(str, "pinwheel"))
+		return (1);*/
+	return (0);
+}
+
+int			main(int argc, char **argv)
 {
 	int		i;
+	int		error;
 
 	if (argc < 2)
-		return (ft_usage("fractol", "[fractal]..."));
+		return (ft_usage("fractol", "[fractal] ..."));
 	i = 0;
+	error = 0;
 	while (++i < argc)
 	{
-		if (is_valid(argv[i]))
-		{
-			; // fork and do fractal stuff with it
-		}
+		if (is_valid(ft_strtolower(argv[i])))
+			spawn(argv[i]);
 		else
+		{
 			fractol_error(argv[i]);
+			error = 1;
+		}
 	}
+	if (error)
+		available_fractals();
 	return (0);
 }
