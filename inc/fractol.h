@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/25 22:42:56 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/25 23:08:45 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void				spawn(char *name);
 t_window			*init_window(/*  ?  */);
 void				set_window_view(t_window *win, float f[4]);
 void				del_window(t_window *win);
+
+void				mandelbrot(void);
 
 #endif
