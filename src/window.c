@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 21:22:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/25 22:57:46 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/27 15:59:04 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@ void		del_window(t_window *win)
 {
 	if (win->ptr && win->mlx)
 		mlx_destroy_window(win->mlx, win->ptr);
-	//if (win->title)
-	//	free(win->title);
-	//
 	//free colors
 	ft_bzero(win, sizeof(t_window));
 	free(win);
 	win = NULL;
 }
 
-t_window	*init_window(unsigned int wid, unsigned int len, char *str)
+t_window	*init_window(char *str)
 {
 	t_window	*win;
 
@@ -37,10 +34,7 @@ t_window	*init_window(unsigned int wid, unsigned int len, char *str)
 	}
 	ft_bzero(win, sizeof(t_window));
 	win->mlx = mlx_init();
-	win->width = wid;
-	win->length = len; // do I want these and not just a macro?
-	win->title = str;
-	win->ptr = mlx_new_window(win->mlx, wid, len, str);
+	win->ptr = mlx_new_window(win->mlx, WINDOW_SIZE, WINDOW_SIZE, str);
 	// init colors
 	return (win);
 }

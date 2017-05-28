@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/25 23:08:45 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/27 23:08:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,63 @@
 # include "mlx.h"
 # include "libft.h"
 # include <math.h>
+# include <pthread.h>
 
-# define THREADS	8
-# define PIXEL_WID	500
-# define PIXEL_LEN	500
+# define NUM_THREADS	8
+# define WINDOW_SIZE	500
 
 // (char*)&i
-typedef union		u_color
+/*typedef union		u_color
 {
 	unsigned int	i;
 	unsigned char	c[4];
 	// something else for use in image string?
-}					t_color;
+}					t_color;*/
 
+typedef struct		s_colarr
+{
+	unsigned char	num_colors;
+	unsigned int	*colors;
 
-// do I want to remove width and length and just always have the square macro?
+typedef struct		s_thread
+{
+	t_window		*win;
+	int				num; // must be zero indexed
+}					t_thread;
+
 typedef struct		s_window
 {
 	void			*mlx;
 	void			*ptr;
-	char			*title;
-	unsigned int	width;
-	unsigned int	height;
-	float			view_width;
-	float			view_height;
+	float			view_size;
 	float			view_center_x;
 	float			view_center_y;
 	unsigned char	max_iterations;
+	unsigned char	color_index;
+	unsigned char	color_offset;
 
 	// color array for cycling
 	void 			*function;
 	void			*data;
 }					t_window;
 
-typedef struct		s_line;
+typedef struct		s_triangle;
 {
-
-int					equals(char *whoneeds, char *strcompare);
-void				spawn(char *name);
+	// stuff for triangles
+	;
+}					t_triangle;
 
 t_window			*init_window(/*  ?  */);
 void				set_window_view(t_window *win, float f[4]);
 void				del_window(t_window *win);
 
+int					equals(char *whoneeds, char *strcompare);
+void				spawn(char *name);i
+
 void				mandelbrot(void);
+
+
+void				zoom_in(t_window *win, int x, int y);
+void				zoom_out(t_window *win, int x, int y);
 
 #endif
