@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/28 17:35:34 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 15:46:31 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@
 # define NUM_PALETTE	16
 
 // (char*)&i
-/*typedef union		u_color
-{
-	unsigned int	i;
-	unsigned char	c[4];
-	// something else for use in image string?
-}					t_color;*/
-
 typedef struct		s_palette
 {
 	unsigned char	num_colors;
@@ -76,5 +69,22 @@ void				mandelbrot(void);
 
 void				zoom_in(t_window *win, int x, int y);
 void				zoom_out(t_window *win, int x, int y);
+
+void				izzet_burn(t_palette *p, unsigned char pi);
+void				simic_synergy(t_palette *p, unsigned char pi);
+void				waroyale(t_palette *p, unsigned char pi);
+void				amber(t_palette *p, unsigned char pi);
+void				azorius(t_palette *p, unsigned char pi);
+void				vendetta(t_palette *p, unsigned char pi);
+void				attednev(t_palette *p, unsigned char pi);
+void				tmobile(t_palette *p, unsigned char pi);
+void				bloody_princess(t_palette *p, unsigned char pi);
+void				jeskai(t_palette *p, unsigned char pi);
+void				absurdity(t_palette *p, unsigned char pi);
+void				forgotten(t_palette *p, unsigned char pi);
+void				america(t_palette *p, unsigned char pi);
+void				rgb(t_palette *p, unsigned char pi);
+void				starbucks(t_palette *p, unsigned char pi);
+void				rave(t_palette *p, unsigned char pi);
 
 #endif

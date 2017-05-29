@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/28 13:43:03 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 15:53:48 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,22 @@ t_palette		*init_colors(void)
 		ft_error("Unable to allocate memory for t_palette");
 		return (NULL);
 	}
-	/* all 16 color definitions */
+	izzet_burn(p, 0);
+	simic_synergy(p, 1);
+	waroyale(p, 2);
+	amber(p, 3);
+	azorius(p, 4);
+	vendetta(p, 5);
+	attednev(p, 6);
+	tmobile(p, 7);
+	bloody_princess(p, 8);
+	jeskai(p, 9);
+	absurdity(p, 10);
+	forgotten(p, 11);
+	america(p, 12);
+	rgb(p, 13);
+	starbucks(p, 14);
+	rave(p, 15);
 	return (p);
 }
 

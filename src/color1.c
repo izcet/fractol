@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/28 17:30:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 15:43:41 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	simic_synergy(t_palette *p, unsigned char pi)
 	p[pi].colors[23] = 0x00FFA528;
 }
 
-void	waroyale(t_pallete *p, unsigned char pi)
+void	waroyale(t_palette *p, unsigned char pi)
 {
 	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
 	p[pi].colors[0] = 0x000A3278;
@@ -99,19 +99,32 @@ void	waroyale(t_pallete *p, unsigned char pi)
 	p[pi].colors[23] = 0x00E18732;pp
 }
 
-void	amber(t_pallete *p, unsigned char pi)
+void	amber(t_palette *p, unsigned char pi)
 {
 	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
-
+	p[pi].colors[0] = 0x001E0500;
+	p[pi].colors[1] = 0x00270502;
+	p[pi].colors[2] = 0x00300505;
+	p[pi].colors[3] = 0x00390508;
+	p[pi].colors[4] = 0x0043050B;
+	p[pi].colors[5] = 0x004C050E;
+	p[pi].colors[6] = 0x00550511;
+	p[pi].colors[7] = 0x005F0514;
+	p[pi].colors[8] = 0x00640A14;
+	p[pi].colors[9] = 0x00781A14;
+	p[pi].colors[10] = 0x008C2B14;
+	p[pi].colors[11] = 0x00A03C14;
+	p[pi].colors[12] = 0x009B0A14;
+	p[pi].colors[13] = 0x00910914;
+	p[pi].colors[14] = 0x00870814;
+	p[pi].colors[15] = 0x007D0714;
+	p[pi].colors[16] = 0x00730714;
+	p[pi].colors[17] = 0x00690614;
+	p[pi].colors[18] = 0x005F0514;
+	p[pi].colors[19] = 0x00550514;
+	p[pi].colors[20] = 0x005A0A14;
+	p[pi].colors[21] = 0x00853214;
+	p[pi].colors[22] = 0x00B05A14;
+	p[pi].colors[23] = 0x00DC8214;
 }
-
-void	function(t_pallete *p, unsigned char pi)
-{
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
-
-}
-
-blue, purple, white, orange;
-
-red, yellow, brown;
 
