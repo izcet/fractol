@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/27 23:08:43 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/28 17:35:34 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define NUM_THREADS	8
 # define WINDOW_SIZE	500
+# define NUM_PALETTE	16
 
 // (char*)&i
 /*typedef union		u_color
@@ -29,10 +30,11 @@
 	// something else for use in image string?
 }					t_color;*/
 
-typedef struct		s_colarr
+typedef struct		s_palette
 {
 	unsigned char	num_colors;
 	unsigned int	*colors;
+}					t_palette;
 
 typedef struct		s_thread
 {
