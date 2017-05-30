@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/28 17:35:37 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 20:47:07 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,27 @@ static int	is_valid(char *str)
 
 int			main(int argc, char **argv)
 {
-	int		i;
-	int		error;
+	int			i;
+	int			error;
+	t_palette	*p;
 
 	if (argc < 2)
 		return (ft_usage("fractol", "[fractal] ..."));
 	i = 0;
 	error = 0;
+	p = init_colors();
 	while (++i < argc)
 	{
 		if (is_valid(ft_strtolower(argv[i])))
-			spawn(argv[i]);
+			spawn(argv[i], p);
 		else
 		{
 			fractol_error(argv[i]);
-			error = 1;
+			error++;
 		}
 	}
 	if (error)
 		available_fractals();
+	del_colors(p);
 	return (0);
 }

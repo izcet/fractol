@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/27 23:09:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 21:24:17 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void			reset_mandelbrot(t_window *win)
 
 	view = {2.0, 2.0, 0.0, 0.0};
 	set_window_view(win, view);
-	win->max_iterations = 25;
-	// reset colors;
+	win->max_iterations = 16;
+	win->p_offset = 0;
+	win->p_index = 0;
 }
 
-unsigned char	compute_mandelbrot(t_window *win, double real, double imag)
+unsigned char	man_compute_point(t_window *win, double real, double imag)
 {
 	unsigned char	i;
 	double			x;
@@ -46,13 +47,13 @@ unsigned char	compute_mandelbrot(t_window *win, double real, double imag)
 	return (i);
 }
 
-void			compute_rows(void *thread)
+void			man_compute_rows(void *thread)
 {
 	t_thread		*t;
 	t_window		*win;
 	int				x;
 	int				y;
-	unsigned char	i;
+	unsigned int	i;
 
 	t = (t_thread*)thread;
 	win = t->win;
@@ -62,26 +63,24 @@ void			compute_rows(void *thread)
 		x = -1;
 		while (++x < WINDOW_SIZE)
 		{
-			i = compute_mandelbrot(win, x, y);
+			i = man_compute_point(win, x, y);
 			if (i < win->max_iterations)
 			{
-				select_color();
-				put_pixel_to_image();
+				i = select_color(t_win);
+				put_pixel_to_image(); //
 			}
 		}
 	}
 }
 
-void			mandelbrot(void)
+void			mandelbrot(t_palette *colors)
 {
 	t_window	*win;
 	float		view[4];
 
-	// can the title string be modified in action?
-	win = init_window(500, 500, "Mandelbrot");
+	win = init_window("Mandelbrot", colors);
 	reset_mandelbrot(win);
 	// set hooks
-	// set colors
 	// set functions for redraw
 	mlx_loop();
 }

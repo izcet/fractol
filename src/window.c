@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 21:22:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/27 15:59:04 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 20:34:38 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ void		del_window(t_window *win)
 {
 	if (win->ptr && win->mlx)
 		mlx_destroy_window(win->mlx, win->ptr);
-	//free colors
+	if (win->colors)
+		del_colors(win->colors);
 	ft_bzero(win, sizeof(t_window));
 	free(win);
 	win = NULL;
 }
 
-t_window	*init_window(char *str)
+t_window	*init_window(char *str, t_palette *colors)
 {
 	t_window	*win;
 
@@ -35,7 +36,7 @@ t_window	*init_window(char *str)
 	ft_bzero(win, sizeof(t_window));
 	win->mlx = mlx_init();
 	win->ptr = mlx_new_window(win->mlx, WINDOW_SIZE, WINDOW_SIZE, str);
-	// init colors
+	win->colors = colors;
 	return (win);
 }
 

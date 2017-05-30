@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 16:14:41 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 21:18:45 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,35 @@ t_palette		*init_colors(void)
 	starbucks(p, 14);
 	rave(p, 15);
 	return (p);
+}
+
+void			del_colors(t_palette *p)
+{
+	unsigned int	i;
+
+	if (p)
+	{
+		i = 0;
+		while (i < NUM_PALETTE)
+		{
+			if (p[i] && p[i]->colors)
+				free(p[i]->colors);
+			else
+				ft_error("NULL palette found in del_colors()");
+			i++;
+		}
+		free(p);
+	}
+	else
+		ft_error("NULL passed to del_colors()");
+}
+
+unsigned int	select_color(t_window *win, unsigned int i)
+{
+	unsigned int	ret;
+
+	ret = Wcolors[Wp_index]->colors[(i + Wp_offset) % W->colors.num_colors];
+	return (ret);
 }
 
 unsigned int	new_color(char a, char r, char g, char b)
