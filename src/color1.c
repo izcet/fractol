@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:51:10 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 22:32:17 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,3 @@ void	amber(t_palette *p, unsigned char pi)
 	p[pi].colors[22] = 0x00B05A14;
 	p[pi].colors[23] = 0x00DC8214;
 }
-

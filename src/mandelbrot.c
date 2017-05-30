@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:24:17 by irhett           ###   ########.fr       */
+/*   Updated: 2017/05/29 22:30:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			man_compute_rows(void *thread)
 			i = man_compute_point(win, x, y);
 			if (i < win->max_iterations)
 			{
-				i = select_color(t_win);
+				i = select_color(t_win, i); //
 				put_pixel_to_image(); //
 			}
 		}
