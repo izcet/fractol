@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 22:30:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:49:19 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define W win->
 
-void			reset_mandelbrot(t_window *win)
+static void				reset_mandelbrot(t_window *win)
 {
 	float	view[4];
 
@@ -25,7 +25,7 @@ void			reset_mandelbrot(t_window *win)
 	win->p_index = 0;
 }
 
-unsigned char	man_compute_point(t_window *win, double real, double imag)
+static unsigned char	man_compute_point(t_window *win, double re, double im)
 {
 	unsigned char	i;
 	double			x;
@@ -35,19 +35,19 @@ unsigned char	man_compute_point(t_window *win, double real, double imag)
 	i = 0;
 	x = 0.0;
 	y = 0.0;
-	real = ((real / WINDOW_SIZE) * Wview_size) + Wcenter_x - (Wview_size * 0.5);
-	imag = ((imag / WINDOW_SIZE) * Wview_size) + Wcenter_y - (Wview_size * 0.5);
+	re = ((re / WINDOW_SIZE) * Wview_size) + Wcenter_x - (Wview_size * 0.5);
+	im = ((im / WINDOW_SIZE) * Wview_size) + Wcenter_y - (Wview_size * 0.5);
 	while ((i < win->max_iterations) && ((x * x) + (y * y) < 4))
 	{
-		temp = (x * x) - (y * y) + real;
-		y = (2 * x * y) + imag;
+		temp = (x * x) - (y * y) + re;
+		y = (2 * x * y) + im;
 		x = temp;
 		i++;
 	}
 	return (i);
 }
 
-void			man_compute_rows(void *thread)
+static void				man_compute_rows(void *thread)
 {
 	t_thread		*t;
 	t_window		*win;
@@ -66,21 +66,40 @@ void			man_compute_rows(void *thread)
 			i = man_compute_point(win, x, y);
 			if (i < win->max_iterations)
 			{
-				i = select_color(t_win, i); //
+				i = select_color(win, i);
 				put_pixel_to_image(); //
 			}
 		}
 	}
+	del_thread(t);
 }
 
-void			mandelbrot(t_palette *colors)
+static void				redraw_mandelbrot(t_window *win)
+{
+	int		i;
+	pthread_t	threads[NUM_THREADS];
+
+	i = 0;
+	while (i < NUM_THREADS)
+	{
+		threads[i] = make_thread(win, i, (void*)man_compute_rows);
+		i++;
+	}
+	i = 0;
+	while (i < THREAD_COUNT)
+		pthread_join(threads[i++], NULL);
+	put_image_to_window(/*?*/);
+}
+
+void					mandelbrot(t_palette *colors)
 {
 	t_window	*win;
 	float		view[4];
 
 	win = init_window("Mandelbrot", colors);
 	reset_mandelbrot(win);
+	win->reset_func = reset_mandelbrot;
+	win->draw_func = redraw_mandelbrot;
 	// set hooks
-	// set functions for redraw
 	mlx_loop();
 }

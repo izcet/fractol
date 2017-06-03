@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:51:13 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:47:40 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	azorius(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x000A78CD;
 	p[pi].colors[1] = 0x000A6BC2;
 	p[pi].colors[2] = 0x000A5EB7;
@@ -43,7 +43,7 @@ void	azorius(t_palette *p, unsigned char pi)
 
 void	vendetta(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x00141414;
 	p[pi].colors[1] = 0x00241924;
 	p[pi].colors[2] = 0x00341E34;
@@ -72,7 +72,7 @@ void	vendetta(t_palette *p, unsigned char pi)
 
 void	attednev(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[23] = 0x00141414;
 	p[pi].colors[22] = 0x00241924;
 	p[pi].colors[21] = 0x00341E34;
@@ -101,7 +101,7 @@ void	attednev(t_palette *p, unsigned char pi)
 
 void	tmobile(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x006E0241;
 	p[pi].colors[1] = 0x00790247;
 	p[pi].colors[2] = 0x0085024E;

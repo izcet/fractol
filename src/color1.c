@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 22:32:17 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:47:30 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	izzet_burn(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x00A00A1E;
 	p[pi].colors[1] = 0x00930A28;
 	p[pi].colors[2] = 0x00860A32;
@@ -43,7 +43,7 @@ void	izzet_burn(t_palette *p, unsigned char pi)
 
 void	simic_synergy(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x001E5A1E;
 	p[pi].colors[1] = 0x001C5628;
 	p[pi].colors[2] = 0x001A5232;
@@ -72,7 +72,7 @@ void	simic_synergy(t_palette *p, unsigned char pi)
 
 void	waroyale(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x000A3278;
 	p[pi].colors[1] = 0x000F2D79;
 	p[pi].colors[2] = 0x0015287B;
@@ -101,7 +101,7 @@ void	waroyale(t_palette *p, unsigned char pi)
 
 void	amber(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x001E0500;
 	p[pi].colors[1] = 0x00270502;
 	p[pi].colors[2] = 0x00300505;

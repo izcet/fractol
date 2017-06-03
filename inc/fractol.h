@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:56:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:42:29 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,93 +15,127 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "mlx_keys_macos.h"
 # include <math.h>
 # include <pthread.h>
 
-# define NUM_THREADS	8
 # define WINDOW_SIZE	500
+# define NUM_THREADS	8
 # define NUM_PALETTE	16
 
 // (char*)&i
 typedef struct			s_palette
 {
-		unsigned char	num_colors;
+		unsigned char	num;
 		unsigned int	*colors;
 }						t_palette;
 
 typedef struct			s_thread
 {
 		t_window		*win;
-		int				num; // must be zero indexed
+		int				num;
 }						t_thread;
+
+typedef struct			s_keys
+{
+	char				a;
+	char				s;
+	char				d;
+	char				f;
+	char				q;
+	char 				w;
+	char				e;
+	char				r;
+	char				up;
+	char				down;
+	char				left;
+	char				right;
+	char				space;
+}						t_keys;
+
+typedef struct			s_mouse
+{
+	int					x;
+	int					y;
+	char				left;
+	char				right;
+	char				center;
+	char				scroll_up;
+	char				scroll_down;
+}						t_mouse;
 
 typedef struct			s_window
 {
 	void				*mlx;
 	void				*ptr;
-	float				view_size;
-	float				view_center_x;
-	float				view_center_y;
+	float				window_size;
+	float				window_center_x;
+	float				window_center_y;
 	unsigned char		max_iterations;
 	unsigned char		p_index;
 	unsigned char		p_offset;
 	t_palette			*colors;
-
-	// color array for cycling
-	void 				*function;
+	t_keys				*keys;
+	t_mouse				*mous;
+	
+	void				*functions;	
 	void				*data;
+	int					changed:1;
+	void				*reset_func;
+	void				*draw_func;
 }						t_window;
 
-typedef struct			s_triangle;
-{
-	// stuff for triangles
-	;
-}						t_triangle;
 
-t_window				*init_window(/*  ?  */);
-void					set_window_view(t_window *win, float f[4]);
+t_window				*init_window(char *title, t_palette *palettes);
+void					set_window_window(t_window *win, float f[4]);
 void					del_window(t_window *win);
+
+t_mouse					*init_mouse(void);
+void					del_mouse(t_mouse *m);
+t_keys					*init_keys(void);
+void					del_keys(t_keys *k);
+
+pthread_t				make_thread(t_window *win, int index, void *function);
+void					del_thread(t_thread *t);
+
 void					spawn(char *name, t_palette *p);
 int						equals(char *whoneeds, char *strcompare);
-
-void					zoom_in(t_window *win, int x, int y);
-void					zoom_out(t_window *win, int x, int y);
 
 
 /*
 ** FRACTALS **
 */
 
-void					mandelbrot(void);
-void					reset_mandelbrot(t_window *win);
-void					man_compute_rows(void *thread);
-unsigned char			man_compute_point(t_window *win, double r, double i);
+void					mandelbrot(t_palette *colors;
+void					julia(t_palette *colors);
+void					serpinski(t_palette *colors);
+void					apollonian(t_palette *colors);
+void					dragon(t_palette *colors);
+void					pinwheel(t_palette *colors);
 
-void					julia(void);
-void					reset_julia(t_window *win);
-void					jul_compute_rows(void *thread);
-unsigned char			jul_compute_point(t_window *win, double r, double i);
+/*
+** HOOKS **
+*/
 
-void					serpinski(void);
-void					reset_serpinski(t_window *win);
-void					ser_compute_rows(void *thread);
-unsigned char			ser_compute_point(t_window *win, double r, double i);
+void					init_hooks(t_window *win);
 
-void					apollonian(void);
-void					reset_apollonian(t_window *win);
-void					apo_compute_rows(void *thread);
-unsigned char			apo_compute_point(t_window *win, double r, double i);
+int						key_press_hook(int keycode, t_window *win);
+int						key_release_hook(int keycode, t_window *win);
+void					toggle_keys(t_window *win, int keycode, int state);
 
-void					dragon(void);
-void					reset_dragon(t_window *win);
-void					dra_compute_rows(void *thread);
-unsigned char			dra_compute_point(t_window *win, double r, double i);
+int						mouse_press_hook(int button, int x, int y, t_window *w);
+int						mouse_release_hook(int b, int x, int y, t_window *w);
+int						motion_hook(int x, int y, t_window *win);
 
-void					pinwheel(void);
-void					reset_pinwheel(t_window *win);
-void					pin_compute_rows(void *thread);
-unsigned char			pin_compute_point(t_window *win, double r, double i);
+int						expose_hook(t_window *win);
+int						exit_hook(t_window *win);
+int						loop_hook(t_window *win);
 
+void					zoom_in(t_window *win, int x, int y);
+void					zoom_out(t_window *win, int x, int y);
+
+void					redraw(t_window *win);
+void					reset(t_window *win);
 
 /*
 ** COLORS **

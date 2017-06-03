@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:51:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:47:46 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	bloody_princess(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x0041055A;
 	p[pi].colors[1] = 0x004C1258;
 	p[pi].colors[2] = 0x00582056;
@@ -43,7 +43,7 @@ void	bloody_princess(t_palette *p, unsigned char pi)
 
 void	jeskai(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 16));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 16));
 	p[pi].colors[0] = 0x000A236E;
 	p[pi].colors[1] = 0x00242F69;
 	p[pi].colors[2] = 0x003F3C65;
@@ -64,7 +64,7 @@ void	jeskai(t_palette *p, unsigned char pi)
 
 void	absurdity(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 12));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 12));
 	p[pi].colors[0] = 0x00500A78;
 	p[pi].colors[1] = 0x005F1487;
 	p[pi].colors[2] = 0x006E1E96;
@@ -81,7 +81,7 @@ void	absurdity(t_palette *p, unsigned char pi)
 
 void	forgotten(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num_colors = 24));
+	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x00344DA0;
 	p[pi].colors[1] = 0x002C599C;
 	p[pi].colors[2] = 0x00246599;

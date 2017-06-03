@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/05/29 21:18:45 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/02 20:47:24 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ unsigned int	select_color(t_window *win, unsigned int i)
 {
 	unsigned int	ret;
 
-	ret = Wcolors[Wp_index]->colors[(i + Wp_offset) % W->colors.num_colors];
+	ret = Wcolors[Wp_index]->colors[(i + Wp_offset) % W->colors.num];
 	return (ret);
 }
 
