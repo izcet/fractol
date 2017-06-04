@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:56:53 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:52:16 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <pthread.h>
 
-# define WINDOW_SIZE	500
-# define NUM_THREADS	8
+# define WINDOW_SIZE	1024
+# define NUM_THREADS	12
 # define NUM_PALETTE	16
 
 // (char*)&i
@@ -156,6 +156,7 @@ void					reset(t_window *win);
 t_palette				*init_colors(void);
 void					del_colors(t_palette *p);
 unsigned int			select_color(t_window *win, unsigned int iteration);
+void					switch_palette(int keycode, t_window *win);
 unsigned int			new_color(char a, char r, char g, char b);
 
 void					izzet_burn(t_palette *p, unsigned char pi);

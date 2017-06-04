@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 15:57:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 18:40:26 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:51:41 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	toggle_keys(t_window *win, int keycode, int state)
 		win->keys->e = state;
 	else if (keycode == KEY_R)
 		win->keys->r = state;
-	else if (keycode == KEY_A)
-		win->keys->a = state;
-	else if (keycode == KEY_S)
-		win->keys->s = state;
 	else if (keycode == KEY_D)
 		win->keys->d = state;
 	else if (keycode == KEY_F)
@@ -43,14 +39,11 @@ void	toggle_keys(t_window *win, int keycode, int state)
 int		key_press_hook(int keycode, t_window *win)
 {
 	if (keycode == KEY_ESCAPE)
-	{
-		del_window(win);
-		exit(0);
-	}
+		exit_hook(win);
 	else if (keycode == KEY_SPACEBAR)
-	{
 		reset(win);
-	}
+	else if (keycode == KEY_A || keycode == KEY_S)
+		switch_palette(keycode, win);
 	else
 		toggle_keys(win, keycode, 1);
 	return (0);
@@ -59,13 +52,11 @@ int		key_press_hook(int keycode, t_window *win)
 int		key_release_hook(int keycode, t_window *win)
 {
 	if (keycode == KEY_ESCAPE)
-	{
 		;
-	}
 	else if (keycode == KEY_SPACEBAR)
-	{
 		;
-	}
+	else if (keycode == KEY_A || keycode == KEY_S)
+		;
 	else
 		toggle_keys(win, keycode, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:50:29 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:51:29 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,24 @@ unsigned int	select_color(t_window *win, unsigned int i)
 	index = (i + win->p_offset) % (win->colors[palette].num);
 	color = win->colors[palette].colors[index];
 	return (color);
+}
+
+void			switch_palette(int keycode, t_window *win)
+{
+	if (keycode == KEY_A)
+	{
+		if (win->p_index == 0)
+			win->p_index = NUM_PALETTE - 1;
+		else
+			win->p_index--;
+	}
+	else
+	{
+		if (win->p_index == NUM_PALETTE - 1)
+			win->p_index = 0;
+		else
+			win->p_index++;
+	}
 }
 
 unsigned int	new_color(char a, char r, char g, char b)

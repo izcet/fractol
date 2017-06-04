@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 13:47:03 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 18:34:53 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:54:36 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	init_hooks(t_window *win)
 	mlx_hook(win->ptr, 6, 0, motion_hook, win);
 	mlx_hook(win->ptr, 12, 0, expose_hook, win);
 	mlx_hook(win->ptr, 17, 0, exit_hook, win);
+	mlx_loop_hook(win->mlx, loop_hook, win);
 }

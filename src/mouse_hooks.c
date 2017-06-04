@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:24:19 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:48:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:17:13 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,17 @@
 
 int		mouse_press_hook(int button, int x, int y, t_window *win)
 {
-	(void)x;
-	(void)y;
-	(void)button;
-	(void)win;
+	if (button == LEFT_CLICK)
+		win->max_iterations++;
+	else if (button == RIGHT_CLICK)
+		win->max_iterations--;
+	else if (button == SCROLL_DOWN)
+		zoom_out(win, x, y);
+	else if (button == SCROLL_UP)
+		zoom_in(win, x, y);
+	else
+		return (0);
+	redraw(win);
 	return (0);
 }
 

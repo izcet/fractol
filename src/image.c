@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/03 16:33:34 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 18:42:17 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 19:04:46 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void		put_pixel(t_window *win, int x, int y, unsigned int color)
 {
 	int		i;
 
-	i = (x + (y * win->image->size_line));
+	i = (x + ((y * win->image->size_line) / 4));
 	win->image->pixels[i] = color;
 }
