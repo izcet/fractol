@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 15:57:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:48:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 18:40:26 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,26 @@ int		key_press_hook(int keycode, t_window *win)
 		del_window(win);
 		exit(0);
 	}
-	else if (keycode == KEY_SPACE)
+	else if (keycode == KEY_SPACEBAR)
 	{
-		reset(t_window *win);
+		reset(win);
 	}
 	else
 		toggle_keys(win, keycode, 1);
+	return (0);
 }
 
 int		key_release_hook(int keycode, t_window *win)
 {
 	if (keycode == KEY_ESCAPE)
 	{
-		exit(1);
+		;
 	}
-	else if (keycode == KEY_SPACE)
+	else if (keycode == KEY_SPACEBAR)
 	{
 		;
 	}
 	else
 		toggle_keys(win, keycode, 0);
+	return (0);
 }

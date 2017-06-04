@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:47:30 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:29:44 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	waroyale(t_palette *p, unsigned char pi)
 	p[pi].colors[20] = 0x00F0F0D7;
 	p[pi].colors[21] = 0x00EBCDA0;
 	p[pi].colors[22] = 0x00E6AA69;
-	p[pi].colors[23] = 0x00E18732;pp
+	p[pi].colors[23] = 0x00E18732;
 }
 
 void	amber(t_palette *p, unsigned char pi)

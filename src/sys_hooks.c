@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:18:41 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:50:05 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 18:00:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int		expose_hook(t_window *win)
 {
 	if (win->changed)
-		; // redraw window
+		redraw(win);
 	return (0);
 }
 
 int		loop_hook(t_window *win)
 {
 	if (win->changed)
-		; // redraw window
+		redraw(win);
 	else
 	{
 		; //check pressed keys and mouses

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:48:44 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:57:53 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	available_fractals(void)
 {
-	int		i;
-
 	ft_putendl("The available fractals are:");
 	ft_putendl(" - mandelbrot");
 /*	ft_putendl(" - julia");
@@ -29,11 +27,13 @@ static void	fractol_error(char *str)
 {
 	ft_putstr_fd("Error: \"", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\" is not a valid fractal.\n");
+	ft_putstr_fd("\" is not a valid fractal.\n", 2);
 }
 
 static int	is_valid(char *str)
 {
+//	ft_putstr("Checking validity of ");
+//	ft_putendl(str);
 	if (equals(str, "mandelbrot"))
 		return (1);
 	/*	if (equals(str, "julia"))
@@ -53,17 +53,16 @@ int			main(int argc, char **argv)
 {
 	int			i;
 	int			error;
-	t_palette	*p;
 
 	if (argc < 2)
 		return (ft_usage("fractol", "[fractal] ..."));
 	i = 0;
 	error = 0;
-	p = init_colors();
 	while (++i < argc)
 	{
-		if (is_valid(ft_strtolower(argv[i])))
-			spawn(argv[i], p);
+		ft_strtolower(argv[i]);
+		if (is_valid(argv[i]))
+			spawn(argv[i]);
 		else
 		{
 			fractol_error(argv[i]);
@@ -72,6 +71,5 @@ int			main(int argc, char **argv)
 	}
 	if (error)
 		available_fractals();
-	del_colors(p);
 	return (0);
 }

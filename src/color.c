@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:47:24 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:50:29 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void			del_colors(t_palette *p)
 		i = 0;
 		while (i < NUM_PALETTE)
 		{
-			if (p[i] && p[i]->colors)
-				free(p[i]->colors);
+			if (p[i].colors)
+				free(p[i].colors);
 			else
 				ft_error("NULL palette found in del_colors()");
 			i++;
@@ -65,10 +65,14 @@ void			del_colors(t_palette *p)
 
 unsigned int	select_color(t_window *win, unsigned int i)
 {
-	unsigned int	ret;
+	unsigned int	color;
+	unsigned char	palette;
+	unsigned char	index;
 
-	ret = Wcolors[Wp_index]->colors[(i + Wp_offset) % W->colors.num];
-	return (ret);
+	palette = win->p_index;
+	index = (i + win->p_offset) % (win->colors[palette].num);
+	color = win->colors[palette].colors[index];
+	return (color);
 }
 
 unsigned int	new_color(char a, char r, char g, char b)

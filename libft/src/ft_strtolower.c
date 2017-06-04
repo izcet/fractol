@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 14:57:20 by irhett            #+#    #+#             */
-/*   Updated: 2017/02/11 17:59:24 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:52:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,8 @@ void	ft_strtolower(char *str)
 {
 	if (str)
 		while (*str != '\0')
+		{
 			*str = ft_tolower(*str);
+			str++;
+		}
 }

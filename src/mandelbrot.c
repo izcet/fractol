@@ -6,19 +6,20 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:49:19 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 18:01:53 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define W win->
 
 static void				reset_mandelbrot(t_window *win)
 {
-	float	view[4];
+	float	view[3];
 
-	view = {2.0, 2.0, 0.0, 0.0};
+	view[0] = 2.0;
+	view[1] = 0.0;
+	view[2] = 0.0;
 	set_window_view(win, view);
 	win->max_iterations = 16;
 	win->p_offset = 0;
@@ -35,8 +36,8 @@ static unsigned char	man_compute_point(t_window *win, double re, double im)
 	i = 0;
 	x = 0.0;
 	y = 0.0;
-	re = ((re / WINDOW_SIZE) * Wview_size) + Wcenter_x - (Wview_size * 0.5);
-	im = ((im / WINDOW_SIZE) * Wview_size) + Wcenter_y - (Wview_size * 0.5);
+	re = ((re / WINDOW_SIZE) * win->size) + win->center_x - (win->size * 0.5);
+	im = ((im / WINDOW_SIZE) * win->size) + win->center_y - (win->size * 0.5);
 	while ((i < win->max_iterations) && ((x * x) + (y * y) < 4))
 	{
 		temp = (x * x) - (y * y) + re;
@@ -67,7 +68,7 @@ static void				man_compute_rows(void *thread)
 			if (i < win->max_iterations)
 			{
 				i = select_color(win, i);
-				put_pixel_to_image(); //
+				put_pixel(win, x, y, i);
 			}
 		}
 	}
@@ -86,20 +87,19 @@ static void				redraw_mandelbrot(t_window *win)
 		i++;
 	}
 	i = 0;
-	while (i < THREAD_COUNT)
+	while (i < NUM_THREADS)
 		pthread_join(threads[i++], NULL);
-	put_image_to_window(/*?*/);
+	use_image(win);
 }
 
-void					mandelbrot(t_palette *colors)
+void					mandelbrot(void)
 {
 	t_window	*win;
-	float		view[4];
 
-	win = init_window("Mandelbrot", colors);
+	win = init_window("Mandelbrot");
 	reset_mandelbrot(win);
 	win->reset_func = reset_mandelbrot;
 	win->draw_func = redraw_mandelbrot;
-	// set hooks
-	mlx_loop();
+	init_hooks(win);
+	mlx_loop(win->mlx);
 }

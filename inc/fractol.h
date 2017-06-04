@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:42:29 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:56:53 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ typedef struct			s_palette
 		unsigned char	num;
 		unsigned int	*colors;
 }						t_palette;
-
-typedef struct			s_thread
-{
-		t_window		*win;
-		int				num;
-}						t_thread;
 
 typedef struct			s_keys
 {
@@ -64,30 +58,42 @@ typedef struct			s_mouse
 	char				scroll_down;
 }						t_mouse;
 
+typedef struct			s_image
+{
+	void				*ptr;
+	unsigned int		*pixels;
+	int					bits_per_pixel;
+	int					size_line;
+	int					endian;
+}						t_image;
+
 typedef struct			s_window
 {
 	void				*mlx;
 	void				*ptr;
-	float				window_size;
-	float				window_center_x;
-	float				window_center_y;
+	float				size;
+	float				center_x;
+	float				center_y;
 	unsigned char		max_iterations;
 	unsigned char		p_index;
 	unsigned char		p_offset;
 	t_palette			*colors;
 	t_keys				*keys;
 	t_mouse				*mous;
-	
-	void				*functions;	
-	void				*data;
+	t_image				*image;
 	int					changed:1;
 	void				*reset_func;
 	void				*draw_func;
 }						t_window;
 
+typedef struct			s_thread
+{
+		t_window		*win;
+		int				num;
+}						t_thread;
 
-t_window				*init_window(char *title, t_palette *palettes);
-void					set_window_window(t_window *win, float f[4]);
+t_window				*init_window(char *title);
+void					set_window_view(t_window *win, float f[3]);
 void					del_window(t_window *win);
 
 t_mouse					*init_mouse(void);
@@ -95,10 +101,16 @@ void					del_mouse(t_mouse *m);
 t_keys					*init_keys(void);
 void					del_keys(t_keys *k);
 
+void					init_image(t_window *win);
+void					reset_image(t_window *win);
+void					use_image(t_window *win);
+void					del_image(t_window *win);
+void					put_pixel(t_window *win, int x, int y, unsigned int c);
+
 pthread_t				make_thread(t_window *win, int index, void *function);
 void					del_thread(t_thread *t);
 
-void					spawn(char *name, t_palette *p);
+void					spawn(char *name);
 int						equals(char *whoneeds, char *strcompare);
 
 
@@ -106,12 +118,12 @@ int						equals(char *whoneeds, char *strcompare);
 ** FRACTALS **
 */
 
-void					mandelbrot(t_palette *colors;
-void					julia(t_palette *colors);
-void					serpinski(t_palette *colors);
-void					apollonian(t_palette *colors);
-void					dragon(t_palette *colors);
-void					pinwheel(t_palette *colors);
+void					mandelbrot(void);
+//void					julia(t_palette *colors);
+//void					serpinski(t_palette *colors);
+//void					apollonian(t_palette *colors);
+//void					dragon(t_palette *colors);
+//void					pinwheel(t_palette *colors);
 
 /*
 ** HOOKS **

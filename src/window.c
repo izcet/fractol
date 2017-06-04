@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 21:22:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:50:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/03 17:57:26 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void		del_window(t_window *win)
 			del_keys(win->keys);
 		if (win->mous)
 			del_mouse(win->mous);
+		if (win->image)
+			del_image(win);
 		ft_bzero(win, sizeof(t_window));
 		free(win);
 		win = NULL;
@@ -32,11 +34,11 @@ void		del_window(t_window *win)
 		ft_error("NULL passed to del_window()");
 }
 
-t_window	*init_window(char *str, t_palette *colors)
+t_window	*init_window(char *str)
 {
 	t_window	*win;
 
-	win = (t_window*)malloc(sizeof(t_win));
+	win = (t_window*)malloc(sizeof(t_window));
 	if (!win)
 	{
 		ft_error("Unable to allocate memory for window.");
@@ -45,16 +47,17 @@ t_window	*init_window(char *str, t_palette *colors)
 	ft_bzero(win, sizeof(t_window));
 	win->mlx = mlx_init();
 	win->ptr = mlx_new_window(win->mlx, WINDOW_SIZE, WINDOW_SIZE, str);
-	win->colors = colors;
+	win->colors = init_colors();
 	win->keys = init_keys();
 	win->mous = init_mouse();
+	init_image(win);
+	win->changed = 1;
 	return (win);
 }
 
-void		set_window_view(t_widow *win, float f[4])
+void		set_window_view(t_window *win, float f[3])
 {
-	win->view_width = f[0];
-	win->view_height = f[1];
-	win->view_center_x = f[2];
-	win->view_center_y = f[3];
+	win->size = f[0];
+	win->center_x = f[1];
+	win->center_y = f[2];
 }
