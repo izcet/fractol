@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 19:51:29 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/04 14:48:00 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void			switch_palette(int keycode, t_window *win)
 			win->p_index = NUM_PALETTE - 1;
 		else
 			win->p_index--;
+		win->changed = 1;
 	}
 	else
 	{
@@ -90,6 +91,7 @@ void			switch_palette(int keycode, t_window *win)
 			win->p_index = 0;
 		else
 			win->p_index++;
+		win->changed = 1;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:24:19 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 19:17:13 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/04 14:45:08 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		mouse_press_hook(int button, int x, int y, t_window *win)
 		zoom_in(win, x, y);
 	else
 		return (0);
-	redraw(win);
+	win->changed = 1;
 	return (0);
 }
 
@@ -45,8 +45,9 @@ int		mouse_release_hook(int button, int x, int y, t_window *win)
 
 int		motion_hook(int x, int y, t_window *win)
 {
-	(void)x;
-	(void)y;
-	(void)win;
+	win->mous->x = x;
+	win->mous->y = y;
+	// if (julia)
+	// win->changed = 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 19:52:16 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/04 14:51:07 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include <pthread.h>
 
-# define WINDOW_SIZE	1024
+# define WINDOW_SIZE	928
 # define NUM_THREADS	12
 # define NUM_PALETTE	16
 
@@ -142,6 +142,11 @@ int						motion_hook(int x, int y, t_window *win);
 int						expose_hook(t_window *win);
 int						exit_hook(t_window *win);
 int						loop_hook(t_window *win);
+
+void					check_keys(t_window *win);
+int						cycle_color_offset(t_window *win);
+int						shift_window_position(t_window *win);
+
 
 void					zoom_in(t_window *win, int x, int y);
 void					zoom_out(t_window *win, int x, int y);
