@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:57:53 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/04 21:17:03 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	available_fractals(void)
 {
 	ft_putendl("The available fractals are:");
 	ft_putendl(" - mandelbrot");
-/*	ft_putendl(" - julia");
-	ft_putendl(" - serpinski");
-	ft_putendl(" - apollonian"); // curves/circles?
-	ft_putendl(" - dragon");
-	ft_putendl(" - pinwheel");*/
+	ft_putendl(" - julia");
+	/*	ft_putendl(" - serpinski");
+		ft_putendl(" - apollonian"); // curves/circles?
+		ft_putendl(" - dragon");
+		ft_putendl(" - pinwheel");*/
 }
 
 static void	fractol_error(char *str)
@@ -32,13 +32,13 @@ static void	fractol_error(char *str)
 
 static int	is_valid(char *str)
 {
-//	ft_putstr("Checking validity of ");
-//	ft_putendl(str);
+	//	ft_putstr("Checking validity of ");
+	//	ft_putendl(str);
 	if (equals(str, "mandelbrot"))
 		return (1);
-	/*	if (equals(str, "julia"))
+	if (equals(str, "julia"))
 		return (1);
-		if (equals(str, "serpinski"))
+	/*	if (equals(str, "serpinski"))
 		return (1);
 		if (equals(str, "apollonian"))
 		return (1);
