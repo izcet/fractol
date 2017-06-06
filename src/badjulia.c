@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   badjulia.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/05 18:17:29 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 18:20:35 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #define W 		WINDOW_SIZE
 #define D		double
 #define HALFWIN	(win->size * 0.5)
-#define JULIA_X ((D)win->mous->x / (D)W)
-#define JULIA_Y ((D)win->mous->y / (D)W)
+#define BJULIAX (((D)win->mous->x / (D)W) * win->size) + win->center_x - HALFWIN
+#define BJULIAY (((D)win->mous->y / (D)W) * win->size) + win->center_y - HALFWIN
 
-static void				reset_julia(t_window *win)
+static void				reset_badjulia(t_window *win)
 {
 	float	view[3];
 
@@ -28,10 +28,10 @@ static void				reset_julia(t_window *win)
 	set_window_view(win, view);
 	win->max_iterations = 32;
 	win->p_offset = 0;
-	win->p_index = 0;
+	win->p_index = 8;
 }
 
-static unsigned char	jul_cp(t_window *win, double re, double im,
+static unsigned char	badjul_cp(t_window *win, double re, double im,
 		double x, double y)
 {
 	unsigned char	i;
@@ -50,7 +50,7 @@ static unsigned char	jul_cp(t_window *win, double re, double im,
 	return (i);
 }
 
-static void				jul_compute_rows(void *thread)
+static void				badjul_compute_rows(void *thread)
 {
 	t_thread		*t;
 	t_window		*win;
@@ -66,7 +66,7 @@ static void				jul_compute_rows(void *thread)
 		x = -1;
 		while (++x < W)
 		{
-			i = jul_cp(win, JULIA_X, JULIA_Y, x, y);
+			i = badjul_cp(win, BJULIAX, BJULIAY, x, y);
 			if (i < win->max_iterations)
 			{
 				i = select_color(win, i);
@@ -77,7 +77,7 @@ static void				jul_compute_rows(void *thread)
 	del_thread(t);
 }
 
-static void				redraw_julia(t_window *win)
+static void				redraw_badjulia(t_window *win)
 {
 	int		i;
 	pthread_t	threads[NUM_THREADS];
@@ -85,7 +85,7 @@ static void				redraw_julia(t_window *win)
 	i = 0;
 	while (i < NUM_THREADS)
 	{
-		threads[i] = make_thread(win, i, (void*)jul_compute_rows);
+		threads[i] = make_thread(win, i, (void*)badjul_compute_rows);
 		i++;
 	}
 	i = 0;
@@ -94,14 +94,14 @@ static void				redraw_julia(t_window *win)
 	use_image(win);
 }
 
-void					julia(void)
+void					badjulia(void)
 {
 	t_window	*win;
 
-	win = init_window("julia");
-	reset_julia(win);
-	win->reset_func = reset_julia;
-	win->draw_func = redraw_julia;
+	win = init_window("bad julia");
+	reset_badjulia(win);
+	win->reset_func = reset_badjulia;
+	win->draw_func = redraw_badjulia;
 	init_hooks(win, 1);
 	mlx_loop(win->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 15:57:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 14:42:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 17:47:00 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	toggle_keys(t_window *win, int keycode, int state)
 {
-	if (keycode == KEY_Q)
-		win->keys->q = state;
-	else if (keycode == KEY_W)
+	if (keycode == KEY_W)
 		win->keys->w = state;
 	else if (keycode == KEY_E)
 		win->keys->e = state;
@@ -44,6 +42,8 @@ int		key_press_hook(int keycode, t_window *win)
 		reset(win);
 	else if (keycode == KEY_A || keycode == KEY_S)
 		switch_palette(keycode, win);
+	else if (keycode == KEY_Q)
+		win->keys->q = !(win->keys->q);
 	else
 		toggle_keys(win, keycode, 1);
 	return (0);

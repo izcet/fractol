@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 21:17:03 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 18:16:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	available_fractals(void)
 	ft_putendl("The available fractals are:");
 	ft_putendl(" - mandelbrot");
 	ft_putendl(" - julia");
+	ft_putendl(" - badjulia");
 	/*	ft_putendl(" - serpinski");
 		ft_putendl(" - apollonian"); // curves/circles?
 		ft_putendl(" - dragon");
@@ -37,6 +38,8 @@ static int	is_valid(char *str)
 	if (equals(str, "mandelbrot"))
 		return (1);
 	if (equals(str, "julia"))
+		return (1);
+	if (equals(str, "badjulia"))
 		return (1);
 	/*	if (equals(str, "serpinski"))
 		return (1);

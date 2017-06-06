@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 17:39:00 by irhett            #+#    #+#              #
-#    Updated: 2017/06/04 21:15:31 by irhett           ###   ########.fr        #
+#    Updated: 2017/06/05 18:20:38 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_FILE	=	main.c redraw.c spawn.c \
 				image.c thread.c window.c input_structs.c \
 				init_hooks.c key_hooks.c mouse_hooks.c sys_hooks.c \
 				key_loops.c zoom.c \
-				mandelbrot.c julia.c
+				mandelbrot.c julia.c badjulia.c
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj

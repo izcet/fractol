@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 21:59:46 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 18:15:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int						equals(char *whoneeds, char *strcompare);
 
 void					mandelbrot(void);
 void					julia();
+void					badjulia();
 //void					serpinski();
 //void					apollonian();
 //void					dragon();

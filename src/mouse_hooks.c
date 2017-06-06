@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:24:19 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/05 17:07:06 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 18:07:05 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ int		mouse_release_hook(int button, int x, int y, t_window *win)
 
 int		motion_hook(int x, int y, t_window *win)
 {
-	win->mous->x = x;
-	win->mous->y = y;
-	win->changed = 1;
+	if (!(win->keys->q))
+	{
+		win->mous->x = x;
+		win->mous->y = y;
+		win->changed = 1;
+	}
 	return (0);
 }

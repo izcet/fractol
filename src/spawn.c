@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 20:31:33 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 21:33:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 18:17:13 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	spawn(char *str)
 			mandelbrot();
 		if (equals(str, "julia"))
 			julia();
+		if (equals(str, "badjulia"))
+			badjulia();
 /*		if (equals(str, "serpinski"))
 			serpinski();
 		if (equals(str, "apollonian"))
