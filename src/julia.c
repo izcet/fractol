@@ -6,25 +6,29 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 21:59:30 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 17:31:35 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-#define W WINDOW_SIZE
+#define W 		WINDOW_SIZE
+#define D		double
+#define HALFWIN	(win->size * 0.5)
+#define JULIA_X (((D)win->mous->x / (D)W) * win->size) + win->center_x - HALFWIN
+#define JULIA_Y (((D)win->mous->y / (D)W) * win->size) + win->center_y - HALFWIN
 
 static void				reset_julia(t_window *win)
 {
 	float	view[3];
 
-	view[0] = 2.0;
+	view[0] = 3.0;
 	view[1] = 0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);
-	win->max_iterations = 10;
+	win->max_iterations = 32;
 	win->p_offset = 0;
-	//win->p_index = 0;
+	win->p_index = 0;
 }
 
 static unsigned char	jul_cp(t_window *win, double re, double im,
@@ -62,7 +66,7 @@ static void				jul_compute_rows(void *thread)
 		x = -1;
 		while (++x < W)
 		{
-			i = jul_cp(win, ((win->mous->x / W) * win->size) + win->center_x - (win->size * 0.5), ((win->mous->y / W) * win->size) + win->center_y - (win->size * 0.5), x, y);
+			i = jul_cp(win, JULIA_X, JULIA_Y, x, y);
 			if (i < win->max_iterations)
 			{
 				i = select_color(win, i);

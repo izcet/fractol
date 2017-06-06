@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 22:00:26 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/05 17:31:24 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void				reset_mandelbrot(t_window *win)
 	view[1] = -0.65;
 	view[2] = 0.0;
 	set_window_view(win, view);
-	win->max_iterations = 18;
+	win->max_iterations = 24;
 	win->p_offset = 0;
-	//win->p_index = 0;
+	win->p_index = 4;
 }
 
 static unsigned char	man_compute_point(t_window *win, double re, double im)
