@@ -6,13 +6,13 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:47:40 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/06 09:20:04 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	azorius(t_palette *p, unsigned char pi)
+void	ice(t_palette *p, unsigned char pi)
 {
 	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x000A78CD;

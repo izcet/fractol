@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:29:44 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/06 09:19:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	waroyale(t_palette *p, unsigned char pi)
 	p[pi].colors[23] = 0x00E18732;
 }
 
-void	amber(t_palette *p, unsigned char pi)
+void	fire(t_palette *p, unsigned char pi)
 {
 	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
 	p[pi].colors[0] = 0x001E0500;

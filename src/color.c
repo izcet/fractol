@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:50:49 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/04 14:48:00 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/07 00:06:37 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_palette		*init_colors(void)
 	izzet_burn(p, 0);
 	simic_synergy(p, 1);
 	waroyale(p, 2);
-	amber(p, 3);
-	azorius(p, 4);
+	fire(p, 3);
+	ice(p, 4);
 	vendetta(p, 5);
 	attednev(p, 6);
 	tmobile(p, 7);

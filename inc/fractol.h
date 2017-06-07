@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/05 18:15:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/07 00:01:49 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,32 @@ typedef struct			s_window
 	int					changed:1;
 	void				*reset_func;
 	void				*draw_func;
+	t_riangle			*tri;
 }						t_window;
 
 typedef struct			s_thread
 {
-		t_window		*win;
-		int				num;
+	t_window			*win;
+	int					num;
 }						t_thread;
+
+typedef struct			s_xy
+{
+	float				x;
+	float				y;
+}						t_xy;
+
+typedef struct			s_triangle
+{
+	t_xy				*p1;
+	t_xy				*p2;
+	t_xy				*p3;
+	struct s_triangle	*t1;
+	struct s_triangle	*t2;
+	struct s_triangle	*t3;
+	t_window			*win;
+	unsigned char		i;
+}						t_riangle;
 
 t_window				*init_window(char *title);
 void					set_window_view(t_window *win, float f[3]);
@@ -121,10 +140,26 @@ int						equals(char *whoneeds, char *strcompare);
 void					mandelbrot(void);
 void					julia();
 void					badjulia();
-//void					serpinski();
+void					serpinski();
 //void					apollonian();
 //void					dragon();
 //void					pinwheel();
+
+/*
+** TRIANGLES **
+*/
+t_riangle				*init_tri(unsigned char i, t_xy *p[3], t_window *w);
+void					del_tri(t_riangle *t);
+void					fill_triangle(t_xy *a, t_xy *b, t_xy *c, t_window *win,
+		unsigned int i);
+void					clear_iterations(t_riangle *t);
+void					del_children(t_riangle *t);
+
+t_xy					*init_xy(double x, double y);
+void					del_xy(t_xy *p);
+t_xy					*get_x_intercept(t_xy top, t_xy bottom, float y);
+t_xy					*get_midpoint(t_xy a, t_xy b);
+
 
 /*
 ** HOOKS **
@@ -168,8 +203,8 @@ unsigned int			new_color(char a, char r, char g, char b);
 void					izzet_burn(t_palette *p, unsigned char pi);
 void					simic_synergy(t_palette *p, unsigned char pi);
 void					waroyale(t_palette *p, unsigned char pi);
-void					amber(t_palette *p, unsigned char pi);
-void					azorius(t_palette *p, unsigned char pi);
+void					fire(t_palette *p, unsigned char pi);
+void					ice(t_palette *p, unsigned char pi);
 void					vendetta(t_palette *p, unsigned char pi);
 void					attednev(t_palette *p, unsigned char pi);
 void					tmobile(t_palette *p, unsigned char pi);

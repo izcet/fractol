@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 21:22:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/03 17:57:26 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/07 00:01:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void		del_window(t_window *win)
 			del_mouse(win->mous);
 		if (win->image)
 			del_image(win);
+		if (win->tri)
+			del_tri(win->tri);
 		ft_bzero(win, sizeof(t_window));
 		free(win);
 		win = NULL;
