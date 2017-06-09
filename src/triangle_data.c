@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   triangle_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/26 09:55:34 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:25:39 by irhett           ###   ########.fr       */
+/*   Created: 2017/06/08 23:22:08 by irhett            #+#    #+#             */
+/*   Updated: 2017/06/08 23:53:07 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void			del_thread(t_thread *t)
+t_riangle	*tri_up_iterations(t_riangle *t, unsigned char )
 {
-	if (t)
-		free(t);
-	else
-		ft_error("NULL passed to del_thread()");
+
+
+
 }
 
-pthread_t		make_thread(t_window *win, int index, void *function)
+t_riangle	*set_triangles(unsigned char i)
 {
-	pthread_t	pth;
-	t_thread	*thread;
+	t_riangle	*t;
 
-	thread = (t_thread*)malloc(sizeof(t_thread));
-	thread->num = index;
-	thread->win = win;
-	pthread_create(&pth, NULL, function, thread);
-	return (pth);
+	if (i == 0)
+		return (NULL);
+
+
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/07 00:06:39 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/08 23:53:11 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	flat_b(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, unsigned int i)
 	int		y;
 	float	x;
 
-	slope.x = (v1->x - v3->x) / (v1->y - v3->y);
-	slope.y = (v2->x - v3->x) / (v2->y - v3->y);
-	y = PLOT(v3.y);
-	xs.x = v1.x;
-	xs.y = v2.x;
-	while (y >= PLOT(v1.y))
+	slope.x = (p1->x - p3->x) / (p1->y - p3->y);
+	slope.y = (p2->x - p3->x) / (p2->y - p3->y);
+	y = PLOT(p3->y);
+	xs.x = p1->x;
+	xs.y = p2->y;
+	while (y >= PLOT(p1->y))
 	{
 		x = xs.x;
 		while (x <= xs.y)
@@ -48,12 +48,12 @@ static void	flat_t(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, unsigned int i)
 	int		y;
 	float	x;
 
-	slope.x = (v1->x - v3->x) / (v1->y - v3->y);
-	slope.y = (v2->x - v3->x) / (v2->y - v3->y);
-	y = PLOT(v3.y);
-	xs.x = v1.x;
-	xs.y = v2.x;
-	while (y <= PLOT(v1.y))
+	slope.x = (p1->x - p3->x) / (p1->y - p3->y);
+	slope.y = (p2->x - p3->x) / (p2->y - p3->y);
+	y = PLOT(p3->y);
+	xs.x = p1->x;
+	xs.y = p2->y;
+	while (y <= PLOT(p1->y))
 	{
 		x = xs.x;
 		while (x <= xs.y)
@@ -105,22 +105,37 @@ void		fill_triangle(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win,
 	if (tri_arr[1].y == tri_arr[2].y)
 	{
 		if (tri_arr[1].x < tri_arr[2].x)
-			flat_b(tri_arr[1], tri_arr[2], tri_arr[0], win, i);
+			flat_b(&tri_arr[1], &tri_arr[2], &tri_arr[0], win, i);
 		else
-			flat_b(tri_arr[2], tri_arr[1], tri_arr[0], win, i);
+			flat_b(&tri_arr[2], &tri_arr[1], &tri_arr[0], win, i);
 	}
 	else
 	{
-		fourth = get_x_intercept(tri_arr[0], tri_arr[2], tri_arr_1.y);
+		fourth = *get_x_intercept(tri_arr[0], tri_arr[2], tri_arr[1].y);
 		if (tri_arr[1].x < fourth.x)
 		{
-			flat_b(tri_arr[1], fourth, tri_arr[0], win, i);
-			flat_t(tri_arr[1], fourth, tri_arr[2], win, i);
+			flat_b(&tri_arr[1], &fourth, &tri_arr[0], win, i);
+			flat_t(&tri_arr[1], &fourth, &tri_arr[2], win, i);
 		}
 		else
 		{
-			flat_b(fourth, tri_arr[1], tri_arr[0], win, i);
-			flat_t(fourth, tri_arr[1], tri_arr[2], win, i);
+			flat_b(&fourth, &tri_arr[1], &tri_arr[0], win, i);
+			flat_t(&fourth, &tri_arr[1], &tri_arr[2], win, i);
 		}
 	}
+}
+
+void		fill_midpoints(t_riangle *t)
+{
+	t_xy	*m1;
+	t_xy	*m2;
+	t_xy	*m3;
+
+	m1 = get_midpoint(t->p1, t->p2);
+	m2 = get_midpoint(t->p1, t->p3);
+	m3 = get_midpoint(t->p2, t->p3);
+	fill_triangle(m1, m2, m3, t->win, t->i);
+	del_xy(m1);
+	del_xy(m2);
+	del_xy(m3);
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/07 00:01:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/08 23:53:23 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct			s_window
 	int					changed:1;
 	void				*reset_func;
 	void				*draw_func;
-	t_riangle			*tri;
+	struct s_triangle	*tri;
 }						t_window;
 
 typedef struct			s_thread
@@ -140,7 +140,7 @@ int						equals(char *whoneeds, char *strcompare);
 void					mandelbrot(void);
 void					julia();
 void					badjulia();
-void					serpinski();
+void					sierpinski();
 //void					apollonian();
 //void					dragon();
 //void					pinwheel();
@@ -152,13 +152,17 @@ t_riangle				*init_tri(unsigned char i, t_xy *p[3], t_window *w);
 void					del_tri(t_riangle *t);
 void					fill_triangle(t_xy *a, t_xy *b, t_xy *c, t_window *win,
 		unsigned int i);
-void					clear_iterations(t_riangle *t);
+void					fill_midpoints(t_riangle *t);
+void					draw_triangles(t_riangle *t);
+t_riangle				*tri_up_iterations(t_riangle *t);
+t_riangle				*clear_iterations(t_riangle *t);
 void					del_children(t_riangle *t);
 
 t_xy					*init_xy(double x, double y);
 void					del_xy(t_xy *p);
 t_xy					*get_x_intercept(t_xy top, t_xy bottom, float y);
-t_xy					*get_midpoint(t_xy a, t_xy b);
+t_xy					*get_midpoint(t_xy *a, t_xy *b);
+
 
 
 /*

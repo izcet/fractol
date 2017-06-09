@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/07 00:06:35 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/08 23:53:17 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_riangle	*init_tri(unsigned char i, t_xy *p[3], t_window *win)
 {
 	t_riangle	*t;
 
-	t = (t_riangle*)malloc(sizeof(t_riangle))
+	t = (t_riangle*)malloc(sizeof(t_riangle));
 	if (!t)
 	{
 		ft_error("Unable to allocate space in init_triangle()");
@@ -81,7 +81,7 @@ t_riangle	*clear_iterations(t_riangle *t)
 		{
 			t->t1 = clear_iterations(t->t1);
 			t->t2 = clear_iterations(t->t2);
-			t->t3 = clear-Iterations(t->t3);
+			t->t3 = clear_iterations(t->t3);
 		}
 		return (t);
 	}
