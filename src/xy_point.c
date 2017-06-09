@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 11:46:28 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:53:27 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 13:03:30 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,23 @@ t_xy	*init_xy(double x, double y)
 	return (p);
 }
 
-t_xy		*get_x_intercept(t_xy top, t_xy bottom, float y)
+t_xy		*get_x_intercept(t_xy *top, t_xy *bottom, float y)
 {
 	float	x;
 
-	x = top.x + ((y - top.y) / (bottom.y - top.y)) * (bottom.x - top.x);
+	x = top->x + ((y - top->y) / (bottom->y - top->y)) * (bottom->x - top->x);
 	return (init_xy(x, y));
 }
 
 t_xy		*get_midpoint(t_xy *a, t_xy *b)
 {
 	return (init_xy(b->x - a->x, b->y - a->y));
+}
+
+t_xy		*xy_copy_of(t_xy *point)
+{
+	t_xy	*p;
+
+	p = init_xy(point->x, point->y);
+	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:53:11 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 12:59:31 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,23 @@ static void	flat_t(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, unsigned int i)
 	}
 }
 
-static void	sort_by_y(t_xy arr[3])
+static void	sort_by_y(t_xy *arr[3])
 {
-	t_xy	temp;
+	t_xy	*temp;
 
-	if (arr[0].y > arr[1].y)
+	if (arr[0]->y > arr[1]->y)
 	{
 		temp = arr[0];
 		arr[0] = arr[1];
 		arr[1] = temp;
 	}
-	if (arr[1].y > arr[2].y)
+	if (arr[1]->y > arr[2]->y)
 	{
 		temp = arr[1];
 		arr[1] = arr[2];
 		arr[2] = temp;
 	}
-	if (arr[0].y > arr[1].y)
+	if (arr[0]->y > arr[1]->y)
 	{
 		temp = arr[0];
 		arr[0] = arr[1];
@@ -95,32 +95,32 @@ static void	sort_by_y(t_xy arr[3])
 void		fill_triangle(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, 
 		unsigned int i)
 {
-	t_xy	tri_arr[3];
-	t_xy	fourth;
+	t_xy	*tri_arr[3];
+	t_xy	*fourth;
 
-	tri_arr[0] = *p1;
-	tri_arr[1] = *p2;
-	tri_arr[2] = *p3;
+	tri_arr[0] = p1;
+	tri_arr[1] = p2;
+	tri_arr[2] = p3;
 	sort_by_y(tri_arr);
-	if (tri_arr[1].y == tri_arr[2].y)
+	if (tri_arr[1]->y == tri_arr[2]->y)
 	{
-		if (tri_arr[1].x < tri_arr[2].x)
-			flat_b(&tri_arr[1], &tri_arr[2], &tri_arr[0], win, i);
+		if (tri_arr[1]->x < tri_arr[2]->x)
+			flat_b(tri_arr[1], tri_arr[2], tri_arr[0], win, i);
 		else
-			flat_b(&tri_arr[2], &tri_arr[1], &tri_arr[0], win, i);
+			flat_b(tri_arr[2], tri_arr[1], tri_arr[0], win, i);
 	}
 	else
 	{
-		fourth = *get_x_intercept(tri_arr[0], tri_arr[2], tri_arr[1].y);
-		if (tri_arr[1].x < fourth.x)
+		fourth = get_x_intercept(tri_arr[0], tri_arr[2], tri_arr[1]->y);
+		if (tri_arr[1]->x < fourth->x)
 		{
-			flat_b(&tri_arr[1], &fourth, &tri_arr[0], win, i);
-			flat_t(&tri_arr[1], &fourth, &tri_arr[2], win, i);
+			flat_b(tri_arr[1], fourth, tri_arr[0], win, i);
+			flat_t(tri_arr[1], fourth, tri_arr[2], win, i);
 		}
 		else
 		{
-			flat_b(&fourth, &tri_arr[1], &tri_arr[0], win, i);
-			flat_t(&fourth, &tri_arr[1], &tri_arr[2], win, i);
+			flat_b(fourth, tri_arr[1], tri_arr[0], win, i);
+			flat_t(fourth, tri_arr[1], tri_arr[2], win, i);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:53:15 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 13:04:21 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void				reset_sierpinski(t_window *win)
 {
 	float	view[3];
 
-	view[0] = 100.0;
+	view[0] = 120.0;
 	view[1] = 0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);
-	win->max_iterations = 16;
+	win->max_iterations = 2;
 	if (win->tri)
 		del_tri(win->tri);
-	win->tri = set_triangles(win->max_iterations);
+	win->tri = start_triangles(win->max_iterations, 60.0, win);
 	win->p_offset = 8;
 	win->p_index = 0;
 }
@@ -95,7 +95,8 @@ void					sierpinski(void)
 {
 	t_window	*win;
 
-	win = init_window("bad julia");
+	win = init_window("sierpinski");
+	win->tri = NULL;
 	reset_sierpinski(win);
 	win->reset_func = reset_sierpinski;
 	win->draw_func = redraw_sierpinski;

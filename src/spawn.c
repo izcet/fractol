@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 20:31:33 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 22:52:15 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 12:18:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	spawn(char *str)
 	pid_t	pid;
 
 	pid = fork();
-	if (!pid)
+	if (pid)
 	{
 		if (equals(str, "mandelbrot"))
 			mandelbrot();

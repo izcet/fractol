@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:53:17 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 12:10:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,4 @@ void		del_tri(t_riangle *t)
 	}
 	else
 		ft_error("NULL passed to del_tri()");
-}
-
-t_riangle	*clear_iterations(t_riangle *t)
-{
-	if (t)
-	{
-		if (t->i > t->win->max_iterations)
-		{
-			del_tri(t);
-			return (NULL);
-		}
-		if (t->i == t->win->max_iterations)
-			del_children(t);
-		else
-		{
-			t->t1 = clear_iterations(t->t1);
-			t->t2 = clear_iterations(t->t2);
-			t->t3 = clear_iterations(t->t3);
-		}
-		return (t);
-	}
-	return (NULL);
 }

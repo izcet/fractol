@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:24:19 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/05 18:07:05 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 12:49:22 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,19 @@
 int		mouse_press_hook(int button, int x, int y, t_window *win)
 {
 	if (button == LEFT_CLICK)
+	{
 		win->max_iterations++;
+		if (win->tri)
+			win->tri = tri_more_iterations(win->tri);
+	}
 	else if (button == RIGHT_CLICK)
+	{
 		win->max_iterations--;
+		if (win->tri)
+			win->tri = tri_less_iterations(win->tri);
+		if (win->max_iterations == 255)
+			win->tri = start_triangles(255, 60.0, win);
+	}
 	else if (button == SCROLL_DOWN)
 		zoom_out(win, x, y);
 	else if (button == SCROLL_UP)
@@ -40,6 +50,10 @@ int		mouse_release_hook(int button, int x, int y, t_window *win)
 	(void)y;
 	(void)button;
 	(void)win;
+	char *str = ft_itoa(win->max_iterations);
+	ft_putstr("\n\nMax iterations is now: ");
+	ft_putendl(str);
+	free(str);
 	return (0);
 }
 

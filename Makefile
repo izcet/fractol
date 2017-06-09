@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 17:39:00 by irhett            #+#    #+#              #
-#    Updated: 2017/06/08 23:53:20 by irhett           ###   ########.fr        #
+#    Updated: 2017/06/09 11:23:40 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_FILE	=	main.c redraw.c spawn.c \
 				init_hooks.c key_hooks.c mouse_hooks.c sys_hooks.c \
 				key_loops.c zoom.c \
 				mandelbrot.c julia.c badjulia.c sierpinski.c \
-				triangle.c triangle_draw.c xy_point.c
+				triangle.c triangle_draw.c triangle_data.c xy_point.c
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
 OBJ_DIR		=	obj

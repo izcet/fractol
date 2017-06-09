@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/08 23:53:23 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 12:59:15 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,14 +154,18 @@ void					fill_triangle(t_xy *a, t_xy *b, t_xy *c, t_window *win,
 		unsigned int i);
 void					fill_midpoints(t_riangle *t);
 void					draw_triangles(t_riangle *t);
-t_riangle				*tri_up_iterations(t_riangle *t);
-t_riangle				*clear_iterations(t_riangle *t);
 void					del_children(t_riangle *t);
+
+void					tri_spawn_children(t_riangle *t);
+t_riangle				*start_triangles(unsigned char i, float l, t_window *w);
+t_riangle				*tri_more_iterations(t_riangle *t);
+t_riangle				*tri_less_iterations(t_riangle *t);
 
 t_xy					*init_xy(double x, double y);
 void					del_xy(t_xy *p);
-t_xy					*get_x_intercept(t_xy top, t_xy bottom, float y);
+t_xy					*get_x_intercept(t_xy *top, t_xy *bottom, float y);
 t_xy					*get_midpoint(t_xy *a, t_xy *b);
+t_xy					*xy_copy_of(t_xy *point);
 
 
 
