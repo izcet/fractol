@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 22:25:07 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 22:47:08 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	draw_horiz(t_riangle *t, int y, double x1, double x2)
 	int				end;
 
 	color = select_color(t->win, t->i);
-	start = HALFWIN + ((t->win->center_x + x1) * WINOFF);
-	end = HALFWIN + ((t->win->center_x + x2) * WINOFF);
-	//printf("calling draw on x (%i->%i) y (%i)\n", start, end, y);
+	start = HALFWIN + ((t->win->center_x + x1) / WINOFF);
+	end = HALFWIN + ((t->win->center_x + x2) / WINOFF);
 	while (start >= end)
 	{
 		put_pixel(t->win, start, y, color);

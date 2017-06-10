@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 22:25:25 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 22:55:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #define W 		WINDOW_SIZE
 #define D		double
 #define HALFWIN	(win->size * 0.5)
-#define JULIA_X ((D)win->mous->x / (D)W)
-#define JULIA_Y ((D)win->mous->y / (D)W)
+#define JULIA_X (((D)win->mous->x - (D)(WINDOW_SIZE / 2)) / (D)W)
+#define JULIA_Y (((D)win->mous->y - (D)(WINDOW_SIZE / 2))/ (D)W)
 
 static void				reset_julia(t_window *win)
 {
