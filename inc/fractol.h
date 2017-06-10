@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 22:16:45 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 23:57:21 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <stdio.h> //
 
-# define WINDOW_SIZE	1024
+# define WINDOW_SIZE	2024
 # define NUM_THREADS	20	
 # define NUM_PALETTE	16
 

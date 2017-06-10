@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 23:22:08 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 22:25:20 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/10 00:13:32 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		tri_spawn_children(t_riangle *t)
 {
 	t_xy	*points[3];
 
+	printf("SPAWNCHILDRENCALLED\n");
 	if (t)
 	{
 		del_children(t);
@@ -38,6 +39,7 @@ void		tri_spawn_children(t_riangle *t)
 
 t_riangle	*tri_more_iterations(t_riangle *t)
 {
+	printf("MORE ITERATIONS CALLED\n");
 	if (t && t->i > t->win->max_iterations)
 	{
 		del_tri(t);
@@ -63,9 +65,9 @@ t_riangle	*start_triangles(unsigned char i, float side_len, t_window *win)
 
 	if (i == 0)
 		return (NULL);
-	p[0] = init_xy(side_len * cos(DTR(0)), side_len * sin(DTR(0)));
-	p[1] = init_xy(side_len * cos(DTR(120)), side_len * sin(DTR(120)));
-	p[2] = init_xy(side_len * cos(DTR(240)), side_len * sin(DTR(240)));
+	p[0] = init_xy(side_len * sin(DTR(0)), -1.0 * side_len * cos(DTR(0)));
+	p[1] = init_xy(side_len * sin(DTR(120)), -1.0 *  side_len * cos(DTR(120)));
+	p[2] = init_xy(side_len * sin(DTR(240)), -1.0 *  side_len * cos(DTR(240)));
 	t = init_tri(1, p, win);
 	t = tri_more_iterations(t);
 	return (t);
