@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 12:59:15 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 22:16:45 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "mlx_keys_macos.h"
 # include <math.h>
 # include <pthread.h>
+# include <stdio.h> //
 
 # define WINDOW_SIZE	1024
 # define NUM_THREADS	20	
@@ -150,9 +151,6 @@ void					sierpinski();
 */
 t_riangle				*init_tri(unsigned char i, t_xy *p[3], t_window *w);
 void					del_tri(t_riangle *t);
-void					fill_triangle(t_xy *a, t_xy *b, t_xy *c, t_window *win,
-		unsigned int i);
-void					fill_midpoints(t_riangle *t);
 void					draw_triangles(t_riangle *t);
 void					del_children(t_riangle *t);
 
@@ -161,12 +159,15 @@ t_riangle				*start_triangles(unsigned char i, float l, t_window *w);
 t_riangle				*tri_more_iterations(t_riangle *t);
 t_riangle				*tri_less_iterations(t_riangle *t);
 
+void					draw_normal(t_riangle *t);
+void					draw_center(t_riangle *t);
+void					draw_horiz(t_riangle *t, int y, double x1, double x2);
+
 t_xy					*init_xy(double x, double y);
 void					del_xy(t_xy *p);
 t_xy					*get_x_intercept(t_xy *top, t_xy *bottom, float y);
 t_xy					*get_midpoint(t_xy *a, t_xy *b);
 t_xy					*xy_copy_of(t_xy *point);
-
 
 
 /*

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 13:04:21 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 22:25:06 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void				reset_sierpinski(t_window *win)
 	win->max_iterations = 2;
 	if (win->tri)
 		del_tri(win->tri);
-	win->tri = start_triangles(win->max_iterations, 60.0, win);
+	win->tri = start_triangles(win->max_iterations, 30.0, win);
 	win->p_offset = 8;
 	win->p_index = 0;
 }
@@ -39,14 +39,14 @@ static void				thread_triangles(void *thread)
 	if (t)
 	{
 		if (t->i == t->win->max_iterations)
-			fill_triangle(t->p1, t->p2, t->p3, t->win, t->i);
+			draw_normal(t);
 		else
 		{
 			if (t->win->keys->q)
-				fill_midpoints(t);
-			draw_triangles(t->t1);
-			draw_triangles(t->t2);
-			draw_triangles(t->t3);
+				draw_center(t);
+			draw_normal(t->t1);
+			draw_normal(t->t2);
+			draw_normal(t->t3);
 		}
 	}
 	del_thread(th);
@@ -61,11 +61,11 @@ void					draw_triangles(t_riangle *t)
 	if (t)
 	{
 		if (t->i == t->win->max_iterations)
-			fill_triangle(t->p1, t->p2, t->p3, t->win, t->i);
+			draw_normal(t);
 		else
 		{
 			if (t->win->keys->q)
-				fill_midpoints(t);
+				draw_center(t);
 			if (t->i == 3 && t->win->max_iterations > 3)
 			{
 				thread_a = make_thread((t_window*)(t->t1), 0, thread_triangles);
@@ -77,9 +77,9 @@ void					draw_triangles(t_riangle *t)
 			}
 			else
 			{
-				draw_triangles(t->t1);
-				draw_triangles(t->t2);
-				draw_triangles(t->t3);
+				draw_normal(t->t1);
+				draw_normal(t->t2);
+				draw_normal(t->t3);
 			}
 		}
 	}		

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 23:22:08 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 12:44:17 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 22:25:20 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,16 @@ t_riangle	*tri_more_iterations(t_riangle *t)
 
 t_riangle	*start_triangles(unsigned char i, float side_len, t_window *win)
 {
-	ft_putendl("Starting triangles");
 	t_riangle	*t;
 	t_xy		*p[3];
 
 	if (i == 0)
 		return (NULL);
-	ft_putendl("I is not null");
-	p[0] = init_xy(0.0, side_len * -1.0);
+	p[0] = init_xy(side_len * cos(DTR(0)), side_len * sin(DTR(0)));
 	p[1] = init_xy(side_len * cos(DTR(120)), side_len * sin(DTR(120)));
 	p[2] = init_xy(side_len * cos(DTR(240)), side_len * sin(DTR(240)));
 	t = init_tri(1, p, win);
-	ft_putendl("triangle initalized. calling more iterations");
 	t = tri_more_iterations(t);
-	ft_putendl("more iterations called. returning");
 	return (t);
 }
 

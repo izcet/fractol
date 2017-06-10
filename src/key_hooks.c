@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 15:57:43 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/05 17:47:00 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/09 18:58:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int		key_press_hook(int keycode, t_window *win)
 	else if (keycode == KEY_A || keycode == KEY_S)
 		switch_palette(keycode, win);
 	else if (keycode == KEY_Q)
+	{
 		win->keys->q = !(win->keys->q);
+		if (win->tri)
+			win->changed = 1;
+	}
 	else
 		toggle_keys(win, keycode, 1);
 	return (0);
