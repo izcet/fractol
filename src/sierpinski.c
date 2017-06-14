@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/10 00:15:37 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 17:28:46 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void				reset_sierpinski(t_window *win)
 {
 	float	view[3];
 
-	view[0] = 120.0;
+	view[0] = 50.0;
 	view[1] = 0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);

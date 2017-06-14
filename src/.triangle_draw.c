@@ -6,145 +6,87 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 19:07:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 15:11:00 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h> //
 
-#define PLOT(x) (int)(((x + (win->size / 2.0)) / win->size) * WINDOW_SIZE)
+#define HALFWIN	(WINDOW_SIZE / 2)
+#define WINOFF	(t->win->size / WINDOW_SIZE)
 
-static void	flat_b(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, unsigned int i)
+void	draw_horiz(t_riangle *t, int y, double x1, double x2)
 {
-	t_xy	*slope;
-	t_xy	*xs;
+	unsigned int	color;
+	int				start;
+	int				end;
+
+	color = select_color(t->win, t->i);
+	start = HALFWIN + (((t->win->center_x + x1) / WINOFF));
+	end = HALFWIN + (((t->win->center_x + x2) / WINOFF));
+	while (start <= end)
+	{
+		if (start >= 0 && start < WINDOW_SIZE)
+			put_pixel(t->win, start, y, color);
+		start++;
+	}
+}
+
+void	draw_normal(t_riangle *t)	
+{
+	float	slope1;
+	float	slope2;
+	float	x1;
+	float	x2;
 	int		y;
-	float	x;
-
-	slope = init_xy((p1->x - p3->x) / (p1->y - p3->y), (p2->x - p3->x) / (p2->y - p3->y));
-	y = PLOT(p3->y);
-	xs = init_xy(p1->x, p2->x);
-	printf("BASE: Y %i -> %i\n", y, PLOT(p1->y));
-	while (y <= PLOT(p1->y))
+	int		max;
+	
+	slope1 = (t->p3->x - t->p1->x) / (t->p3->y - t->p1->y);
+	slope2 = (t->p2->x - t->p1->x) / (t->p2->y - t->p1->y);
+	x1 = t->p1->x;
+	x2 = t->p1->x;
+	y = HALFWIN + ((t->win->center_y + t->p1->y) * WINOFF); // fix
+	max = HALFWIN + ((t->win->center_y + t->p2->y) * WINOFF); // fix
+	while (y <= max)
 	{
-		printf("Here\n");
-		x = xs->y;
-		printf("BASE: X %f -> %f, %f\n", xs->y, xs->x, (xs->y - xs->x) / (((xs->y - xs->x) / win->size) * WINDOW_SIZE));
-		while (x >= xs->x)
-		{
-			i = select_color(win, i);
-			printf("BASE: X %i Y %i\n", PLOT(x), y);
-			put_pixel(win, PLOT(x), y, i);
-			x -= (xs->y - xs->x) / (((xs->y - xs->x) / win->size) * WINDOW_SIZE);
-		}
-		xs->x -= slope->x;
-		xs->y -= slope->y;
+		if (y >= 0 && y < WINDOW_SIZE)
+			draw_horiz(t, y, x1, x2);
 		y++;
+		x1 += slope1;
+		x2 += slope2;
 	}
-	del_xy(slope);
-	del_xy(xs);
 }
 
-static void	flat_t(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, unsigned int i)
+void	draw_center(t_riangle *t)
 {
-	t_xy	*slope;
-	t_xy	*xs;
+	float	slope1;
+	float	slope2;
+	float	x1;
+	float	x2;
 	int		y;
-	float	x;
+	int		min;
+	t_xy	*p4;
+	t_xy	*p5;
+	t_xy	*p6;
 
-	slope = init_xy((p1->x - p3->x) / (p1->y - p3->y), (p2->x - p3->x) / (p2->y - p3->y));
-	y = PLOT(p3->y);
-	xs = init_xy(p1->x, p2->x);
-	printf("UPSIDE_DOWN: Y %i -> %i\n", y, PLOT(p1->y));
-	while (y <= PLOT(p1->y))
+	p4 = get_midpoint(t->p1, t->p2);
+	p5 = get_midpoint(t->p2, t->p3);
+	p6 = get_midpoint(t->p3, t->p1);
+	slope1 = (p5->x - p4->x) / (p5->y - p4->y);
+	slope2 = (p5->x - p6->x) / (p5->y - p6->y);
+	x1 = p5->x;
+	x2 = p5->x;
+	y = HALFWIN + ((t->win->center_y + p5->y) * WINOFF);
+	min = HALFWIN + ((t->win->center_y + p6->y) * WINOFF);
+	printf("USPIDE: y (%i->%i)\n", y, min);
+	while (y <= min)
 	{
-		x = xs->x;
-		while (x <= xs->y)
-		{
-			i = select_color(win, i);
-			put_pixel(win, PLOT(x), y, i);
-			x += (xs->y - xs->x) / (((xs->y - xs->x) / win->size) * WINDOW_SIZE);
-		}
-		xs->x -= slope->x;
-		xs->y -= slope->y;
+		draw_horiz(t, y, x1, x2);
 		y++;
+		x1 -= slope1;
+		x2 -= slope2;
 	}
-	del_xy(slope);
-	del_xy(xs);
-}
-
-static void	sort_by_y(t_xy *arr[3])
-{
-	t_xy	*temp;
-
-	if (arr[0]->y > arr[1]->y)
-	{
-		temp = arr[0];
-		arr[0] = arr[1];
-		arr[1] = temp;
-	}
-	if (arr[1]->y > arr[2]->y)
-	{
-		temp = arr[1];
-		arr[1] = arr[2];
-		arr[2] = temp;
-	}
-	if (arr[0]->y > arr[1]->y)
-	{
-		temp = arr[0];
-		arr[0] = arr[1];
-		arr[1] = temp;
-	}
-}
-
-void		fill_triangle(t_xy *p1, t_xy *p2, t_xy *p3, t_window *win, 
-		unsigned int i)
-{
-	t_xy	*tri_arr[3];
-	t_xy	*fourth;
-
-	tri_arr[0] = xy_copy_of(p1);
-	tri_arr[1] = xy_copy_of(p2);
-	tri_arr[2] = xy_copy_of(p3);
-	sort_by_y(tri_arr);
-	if (tri_arr[1]->y == tri_arr[2]->y) // do int conversion to pixel
-	{
-		if (tri_arr[1]->x < tri_arr[2]->x)
-			flat_b(tri_arr[1], tri_arr[2], tri_arr[0], win, i);
-		else
-			flat_b(tri_arr[2], tri_arr[1], tri_arr[0], win, i);
-	}
-	else
-	{
-		fourth = get_x_intercept(tri_arr[0], tri_arr[2], tri_arr[1]->y);
-		if (tri_arr[1]->x < fourth->x)
-		{
-			flat_b(tri_arr[1], fourth, tri_arr[0], win, i);
-			flat_t(tri_arr[1], fourth, tri_arr[2], win, i);
-		}
-		else
-		{
-			flat_b(fourth, tri_arr[1], tri_arr[0], win, i);
-			flat_t(fourth, tri_arr[1], tri_arr[2], win, i);
-		}
-		del_xy(fourth);
-	}
-	del_xy(tri_arr[0]);
-	del_xy(tri_arr[1]);
-	del_xy(tri_arr[2]);
-}
-
-void		fill_midpoints(t_riangle *t)
-{
-	t_xy	*p[3];
-
-	p[0] = get_midpoint(t->p1, t->p2);
-	p[1] = get_midpoint(t->p1, t->p3);
-	p[2] = get_midpoint(t->p2, t->p3);
-	sort_by_y(p);
-	flat_t(p[0], p[1], p[2], t->win, t->i);
-	del_xy(p[0]);
-	del_xy(p[1]);
-	del_xy(p[2]);
+	del_xy(p4);
+	del_xy(p5);
+	del_xy(p6);
 }

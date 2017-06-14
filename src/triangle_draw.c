@@ -6,14 +6,14 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/10 00:03:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 17:27:36 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 #define HALFWIN	(WINDOW_SIZE / 2)
-#define WINOFF	(t->win->size / WINDOW_SIZE)
+#define WINOFF	((1 / t->win->size) / WINDOW_SIZE)
 
 void	draw_horiz(t_riangle *t, int y, double x1, double x2)
 {
@@ -22,12 +22,13 @@ void	draw_horiz(t_riangle *t, int y, double x1, double x2)
 	int				end;
 
 	color = select_color(t->win, t->i);
-	start = HALFWIN + (((t->win->center_x + x1) / WINOFF));
-	end = HALFWIN + (((t->win->center_x + x2) / WINOFF));
-	while (start >= end)
+	start = (t->win->center_x + x1) + HALFWIN;
+	end = (t->win->center_x + x2) + HALFWIN;
+	while (start <= end)
 	{
-		put_pixel(t->win, start, y, color);
-		start--;
+		if (start >= 0 && start < WINDOW_SIZE)
+			put_pixel(t->win, start, y, color);
+		start++;
 	}
 }
 
@@ -40,15 +41,16 @@ void	draw_normal(t_riangle *t)
 	int		y;
 	int		max;
 	
-	slope1 = (t->p3->x - t->p1->x) / (t->p3->y - t->p1->y);
-	slope2 = (t->p2->x - t->p1->y) / (t->p2->y - t->p1->y);
+	slope1 = (t->p3->x - t->p1->x) / (t->p3->y - t->p1->y); // make relative to
+	slope2 = (t->p2->x - t->p1->x) / (t->p2->y - t->p1->y); //t->win->size
 	x1 = t->p1->x;
 	x2 = t->p1->x;
-	y = HALFWIN + ((t->win->center_y + t->p1->y) * WINOFF);
-	max = HALFWIN + ((t->win->center_y + t->p2->y) * WINOFF);
+	y = ((t->win->center_y + t->p1->y) * WINOFF) + HALFWIN;
+	max = ((t->win->center_y + t->p2->y) * WINOFF) + HALFWIN;
 	while (y <= max)
 	{
-		draw_horiz(t, y, x1, x2);
+		if (y >= 0 && y < WINDOW_SIZE)
+			draw_horiz(t, y, x1, x2);
 		y++;
 		x1 += slope1;
 		x2 += slope2;
@@ -66,21 +68,21 @@ void	draw_center(t_riangle *t)
 	t_xy	*p4;
 	t_xy	*p5;
 	t_xy	*p6;
-
+	printf("window size is %f\n", t->win->size);
 	p4 = get_midpoint(t->p1, t->p2);
 	p5 = get_midpoint(t->p2, t->p3);
 	p6 = get_midpoint(t->p3, t->p1);
-	slope1 = (p5->x - p4->x) / (p5->y - p4->y);
-	slope2 = (p5->x - p6->x) / (p5->y - p6->y);
+	slope1 = (p5->x - p6->x) / (p5->y - p6->y);
+	slope2 = (p5->x - p4->x) / (p5->y - p4->y);
 	x1 = p5->x;
 	x2 = p5->x;
 	y = HALFWIN + ((t->win->center_y + p5->y) * WINOFF);
 	min = HALFWIN + ((t->win->center_y + p6->y) * WINOFF);
-	printf("USPIDE: y (%i->%i)\n", y, min);
-	while (y <= min)
+	while (y >= min)
 	{
-		draw_horiz(t, y, x1, x2);
-		y++;
+		if (y >= 0 && y < WINDOW_SIZE)
+			draw_horiz(t, y, x1, x2);
+		y--;
 		x1 -= slope1;
 		x2 -= slope2;
 	}

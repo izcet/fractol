@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 21:22:44 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 12:52:03 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 14:58:39 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_window	*init_window(char *str)
 	}
 	ft_bzero(win, sizeof(t_window));
 	win->mlx = mlx_init();
-	win->ptr = mlx_new_window(win->mlx, WINDOW_SIZE, WINDOW_SIZE, str);
+	win->ptr = mlx_new_window(win->mlx, WINDOW_SIZE, WINDOW_SIZE - 4, str);
 	win->colors = init_colors();
 	win->keys = init_keys();
 	win->mous = init_mouse();
