@@ -6,13 +6,11 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/04 13:55:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 11:23:07 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:59:26 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "fractol.h"
-
 
 int		cycle_color_offset(t_window *win)
 {
@@ -64,5 +62,4 @@ void	check_keys(t_window *win)
 		win->changed = 1;
 	if (shift_window_position(win))
 		win->changed = 1;
-
 }

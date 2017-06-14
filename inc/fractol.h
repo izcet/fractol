@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:52:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 01:10:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@
 # include "mlx_keys_macos.h"
 # include <math.h>
 # include <pthread.h>
-# include <stdio.h> //
 
 # define WINDOW_SIZE	1024
-# define NUM_THREADS	20	
+# define NUM_THREADS	20
 # define NUM_PALETTE	16
 
-// (char*)&i
 typedef struct			s_palette
 {
-		unsigned char	num;
-		unsigned int	*colors;
+	unsigned char		num;
+	unsigned int		*colors;
 }						t_palette;
 
 typedef struct			s_keys
@@ -38,7 +36,7 @@ typedef struct			s_keys
 	char				d;
 	char				f;
 	char				q;
-	char 				w;
+	char				w;
 	char				e;
 	char				r;
 	char				up;
@@ -134,11 +132,9 @@ void					del_thread(t_thread *t);
 void					spawn(char *name);
 int						equals(char *whoneeds, char *strcompare);
 
-
 /*
 ** FRACTALS **
 */
-
 void					mandelbrot(void);
 void					julia(void);
 void					badjulia(void);
@@ -169,11 +165,9 @@ t_xy					*get_x_intercept(t_xy *top, t_xy *bottom, float y);
 t_xy					*get_midpoint(t_xy *a, t_xy *b);
 t_xy					*xy_copy_of(t_xy *point);
 
-
 /*
 ** HOOKS **
 */
-
 void					init_hooks(t_window *win, int track_mouse);
 
 int						key_press_hook(int keycode, t_window *win);
@@ -192,7 +186,6 @@ void					check_keys(t_window *win);
 int						cycle_color_offset(t_window *win);
 int						shift_window_position(t_window *win);
 
-
 void					zoom_in(t_window *win, int x, int y);
 void					zoom_out(t_window *win, int x, int y);
 
@@ -202,12 +195,10 @@ void					reset(t_window *win);
 /*
 ** COLORS **
 */
-
 t_palette				*init_colors(void);
 void					del_colors(t_palette *p);
 unsigned int			select_color(t_window *win, unsigned int iteration);
 void					switch_palette(int keycode, t_window *win);
-unsigned int			new_color(char a, char r, char g, char b);
 
 void					izzet_burn(t_palette *p, unsigned char pi);
 void					simic_synergy(t_palette *p, unsigned char pi);

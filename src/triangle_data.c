@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 23:22:08 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:08:39 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 01:21:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ t_riangle	*start_triangles(unsigned char i, float side_len, t_window *win)
 	if (i == 0)
 		return (NULL);
 	p[0] = init_xy(side_len * sin(DTR(0)), -1.0 * side_len * cos(DTR(0)));
-	p[1] = init_xy(side_len * sin(DTR(120)), -1.0 *  side_len * cos(DTR(120)));
-	p[2] = init_xy(side_len * sin(DTR(240)), -1.0 *  side_len * cos(DTR(240)));
+	p[1] = init_xy(side_len * sin(DTR(120)), -1.0 * side_len * cos(DTR(120)));
+	p[2] = init_xy(side_len * sin(DTR(240)), -1.0 * side_len * cos(DTR(240)));
 	t = init_tri(1, p, win);
 	t = tri_more_iterations(t);
 	return (t);
@@ -91,4 +91,4 @@ t_riangle	*tri_less_iterations(t_riangle *t)
 		return (t);
 	}
 	return (NULL);
-	}
+}

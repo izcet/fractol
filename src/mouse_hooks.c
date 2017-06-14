@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/31 15:24:19 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:04:06 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 01:20:04 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,37 @@
 #define SCROLL_UP		4
 #define SCROLL_DOWN		5
 
-int		mouse_press_hook(int button, int x, int y, t_window *win)
+static void	mouse_triangle(int button, t_window *win)
 {
 	if (button == LEFT_CLICK)
 	{
 		win->max_iterations++;
-		if (win->triangles)
-		{
-			if (!(win->tri))
-				win->tri = start_triangles(win->max_iterations, 500.0, win);
-			win->tri = tri_more_iterations(win->tri);
-		}
+		if (!(win->tri))
+			win->tri = start_triangles(win->max_iterations, 500.0, win);
+		win->tri = tri_more_iterations(win->tri);
+		win->max_iterations--;
 	}
 	else if (button == RIGHT_CLICK)
 	{
 		win->max_iterations--;
-		if (win->triangles)
+		win->tri = tri_less_iterations(win->tri);
+		if (win->max_iterations > 100)
 		{
-			win->tri = tri_less_iterations(win->tri);
-			if (win->max_iterations > 100)
-			{
-				win->max_iterations = 10;
-				win->tri = start_triangles(win->max_iterations, 500.0, win);
-			}
+			win->max_iterations = 10;
+			win->tri = start_triangles(win->max_iterations, 500.0, win);
 		}
+		win->max_iterations++;
 	}
+}
+
+int			mouse_press_hook(int button, int x, int y, t_window *win)
+{
+	if (win->triangles)
+		mouse_triangle(button, win);
+	if (button == LEFT_CLICK)
+		win->max_iterations++;
+	else if (button == RIGHT_CLICK)
+		win->max_iterations--;
 	else if (button == SCROLL_DOWN)
 		zoom_out(win, x, y);
 	else if (button == SCROLL_UP)
@@ -53,7 +59,7 @@ int		mouse_press_hook(int button, int x, int y, t_window *win)
 	return (0);
 }
 
-int		mouse_release_hook(int button, int x, int y, t_window *win)
+int			mouse_release_hook(int button, int x, int y, t_window *win)
 {
 	(void)x;
 	(void)y;
@@ -62,7 +68,7 @@ int		mouse_release_hook(int button, int x, int y, t_window *win)
 	return (0);
 }
 
-int		motion_hook(int x, int y, t_window *win)
+int			motion_hook(int x, int y, t_window *win)
 {
 	if (!(win->keys->q))
 	{

@@ -6,12 +6,11 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:38:15 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:58:09 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 
 static void				reset_mandelcube(t_window *win)
 {
@@ -77,7 +76,7 @@ static void				man_compute_rows(void *thread)
 
 static void				redraw_mandelcube(t_window *win)
 {
-	int		i;
+	int			i;
 	pthread_t	threads[NUM_THREADS];
 
 	i = 0;

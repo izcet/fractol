@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:43:58 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 01:47:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #define W 		WINDOW_SIZE
 #define D		double
 #define HALFWIN	(win->size * 0.5)
-#define juliacube_X (((D)win->mous->x - (D)(WINDOW_SIZE / 2)) / (D)W)
-#define juliacube_Y (((D)win->mous->y - (D)(WINDOW_SIZE / 2))/ (D)W)
 
 static void				reset_juliacube(t_window *win)
 {
@@ -31,15 +29,18 @@ static void				reset_juliacube(t_window *win)
 	win->p_index = 0;
 }
 
-static unsigned char	jul_cp(t_window *win, double re, double im,
-		double x, double y)
+static unsigned char	jul_cp(t_window *win, double x, double y)
 {
 	unsigned char	i;
 	double			temp;
+	double			re;
+	double			im;
 
 	i = 0;
 	x = ((x / W) * win->size) + win->center_x - (win->size * 0.5);
 	y = ((y / W) * win->size) + win->center_y - (win->size * 0.5);
+	re = (((D)win->mous->x - (D)(WINDOW_SIZE / 2)) / (D)W);
+	im = (((D)win->mous->y - (D)(WINDOW_SIZE / 2)) / (D)W);
 	while ((i < win->max_iterations) && ((x * x) + (y * y) < 4))
 	{
 		temp = (x * x * x) - (y * y * x) - (2 * x * y * y) + re;
@@ -66,7 +67,7 @@ static void				jul_compute_rows(void *thread)
 		x = -1;
 		while (++x < W)
 		{
-			i = jul_cp(win, juliacube_X, juliacube_Y, x, y);
+			i = jul_cp(win, x, y);
 			if (i < win->max_iterations)
 			{
 				i = select_color(win, i);
@@ -79,7 +80,7 @@ static void				jul_compute_rows(void *thread)
 
 static void				redraw_juliacube(t_window *win)
 {
-	int		i;
+	int			i;
 	pthread_t	threads[NUM_THREADS];
 
 	i = 0;

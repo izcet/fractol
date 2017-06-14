@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:01:48 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 01:23:01 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static void				reset_sierpinski(t_window *win)
 	win->p_index = 0;
 }
 
-static void				thread_triangles(void *thread)
+static void				thread_tri(void *thread)
 {
 	t_thread	*th;
 	t_riangle	*t;
-
 
 	th = (t_thread*)thread;
 	t = (t_riangle*)(th->win);
@@ -54,9 +53,7 @@ static void				thread_triangles(void *thread)
 
 void					draw_triangles(t_riangle *t)
 {
-	pthread_t	thread_a;
-	pthread_t	thread_b;
-	pthread_t	thread_c;
+	pthread_t	threads[3];
 
 	if (t)
 	{
@@ -66,14 +63,14 @@ void					draw_triangles(t_riangle *t)
 		{
 			if (t->win->keys->q)
 				draw_center(t);
-			if (t->i == 3 && t->win->max_iterations > 3)
+			if (t->i % 3 == 0 && t->win->max_iterations > 3)
 			{
-				thread_a = make_thread((t_window*)(t->t1), 0, thread_triangles);
-				thread_b = make_thread((t_window*)(t->t2), 0, thread_triangles);
-				thread_c = make_thread((t_window*)(t->t3), 0, thread_triangles);
-				pthread_join(thread_a, NULL);
-				pthread_join(thread_b, NULL);
-				pthread_join(thread_c, NULL);
+				threads[0] = make_thread((t_window*)(t->t1), 0, thread_tri);
+				threads[1] = make_thread((t_window*)(t->t2), 0, thread_tri);
+				threads[2] = make_thread((t_window*)(t->t3), 0, thread_tri);
+				pthread_join(threads[0], NULL);
+				pthread_join(threads[1], NULL);
+				pthread_join(threads[2], NULL);
 			}
 			else
 			{
@@ -82,7 +79,7 @@ void					draw_triangles(t_riangle *t)
 				draw_triangles(t->t3);
 			}
 		}
-	}		
+	}
 }
 
 static void				redraw_sierpinski(t_window *win)
