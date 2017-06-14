@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 01:10:09 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 15:01:37 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void					del_thread(t_thread *t);
 
 void					spawn(char *name);
 int						equals(char *whoneeds, char *strcompare);
+void					print_controls(int *types, int num);
 
 /*
 ** FRACTALS **
@@ -149,6 +150,7 @@ t_riangle				*init_tri(unsigned char i, t_xy *p[3], t_window *w);
 void					del_tri(t_riangle *t);
 void					draw_triangles(t_riangle *t);
 void					del_children(t_riangle *t);
+void					draw_next(t_riangle *t);
 
 void					tri_spawn_children(t_riangle *t);
 t_riangle				*start_triangles(unsigned char i, float l, t_window *w);
@@ -195,6 +197,8 @@ void					reset(t_window *win);
 /*
 ** COLORS **
 */
+void					init_palette(t_palette *p, unsigned char i,
+		unsigned char n);
 t_palette				*init_colors(void);
 void					del_colors(t_palette *p);
 unsigned int			select_color(t_window *win, unsigned int iteration);

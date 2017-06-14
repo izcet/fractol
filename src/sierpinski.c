@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 01:23:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 13:56:28 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static void				thread_tri(void *thread)
 		{
 			if (t->win->keys->q)
 				draw_center(t);
-			draw_triangles(t->t1);
-			draw_triangles(t->t2);
-			draw_triangles(t->t3);
+			draw_next(t);
 		}
 	}
 	del_thread(th);
@@ -73,11 +71,7 @@ void					draw_triangles(t_riangle *t)
 				pthread_join(threads[2], NULL);
 			}
 			else
-			{
-				draw_triangles(t->t1);
-				draw_triangles(t->t2);
-				draw_triangles(t->t3);
-			}
+				draw_next(t);
 		}
 	}
 }

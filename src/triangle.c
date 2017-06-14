@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:02:38 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 13:56:02 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ void		del_tri(t_riangle *t)
 	}
 	else
 		ft_error("NULL passed to del_tri()");
+}
+
+void		draw_next(t_riangle *t)
+{
+	draw_triangles(t->t1);
+	draw_triangles(t->t2);
+	draw_triangles(t->t3);
 }

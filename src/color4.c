@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/28 09:18:37 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/02 20:47:52 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 13:48:51 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	america(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 7));
+	init_palette(p, pi, 7);
 	p[pi].colors[0] = 0x00FF050A;
 	p[pi].colors[1] = 0x00CD050A;
 	p[pi].colors[2] = 0x00FFFFFF;
@@ -26,7 +26,7 @@ void	america(t_palette *p, unsigned char pi)
 
 void	rgb(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 16));
+	init_palette(p, pi, 16);
 	p[pi].colors[0] = 0x00FF0000;
 	p[pi].colors[1] = 0x0000FF00;
 	p[pi].colors[2] = 0x000000FF;
@@ -47,7 +47,7 @@ void	rgb(t_palette *p, unsigned char pi)
 
 void	starbucks(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 12));
+	init_palette(p, pi, 11);
 	p[pi].colors[0] = 0x00FFFFFF;
 	p[pi].colors[1] = 0x00DBECDA;
 	p[pi].colors[2] = 0x00B7D9B6;
@@ -63,7 +63,7 @@ void	starbucks(t_palette *p, unsigned char pi)
 
 void	rave(t_palette *p, unsigned char pi)
 {
-	p[pi].colors = malloc(sizeof(unsigned int) * (p[pi].num = 24));
+	init_palette(p, pi, 22);
 	p[pi].colors[0] = 0x00000000;
 	p[pi].colors[1] = 0x0005FF05;
 	p[pi].colors[2] = 0x00000000;

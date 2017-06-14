@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 17:39:00 by irhett            #+#    #+#              #
-#    Updated: 2017/06/14 00:52:23 by irhett           ###   ########.fr        #
+#    Updated: 2017/06/14 14:58:17 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ XFLAGS		=	-L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 FLAGS		=	$(CFLAGS) $(XFLAGS)
 
 SRC_DIR		=	src
-SRC_FILE	=	main.c redraw.c spawn.c \
+SRC_FILE	=	main.c redraw.c spawn.c print_controls.c \
 				color.c color1.c color2.c color3.c color4.c \
 				equals.c \
 				image.c thread.c window.c input_structs.c \
