@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:04:54 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 23:42:39 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	draw_center(t_riangle *t)
 	p6 = get_midpoint(t->p3, t->p1);
 	slope1 = (p5->x - p6->x) / (p5->y - p6->y);
 	slope2 = (p5->x - p4->x) / (p5->y - p4->y);
-	x1 = p5->x * WINOFF;
-	x2 = p5->x * WINOFF;
+	x1 = p5->x;
+	x2 = p5->x;
 	y = HALFWIN + ((t->win->center_y + p5->y) * WINOFF);
 	min = HALFWIN + ((t->win->center_y + p6->y) * WINOFF);
 	while (y >= min)

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/08 23:22:08 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/13 17:28:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:08:39 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		tri_spawn_children(t_riangle *t)
 {
 	t_xy	*points[3];
 
-	printf("SPAWNCHILDRENCALLED\n");
 	if (t)
 	{
 		del_children(t);
@@ -39,7 +38,6 @@ void		tri_spawn_children(t_riangle *t)
 
 t_riangle	*tri_more_iterations(t_riangle *t)
 {
-	printf("MORE ITERATIONS CALLED\n");
 	if (t && t->i > t->win->max_iterations)
 	{
 		del_tri(t);
@@ -93,4 +91,4 @@ t_riangle	*tri_less_iterations(t_riangle *t)
 		return (t);
 	}
 	return (NULL);
-}
+	}

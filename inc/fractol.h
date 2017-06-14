@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:58:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 23:57:21 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/13 23:52:43 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <stdio.h> //
 
-# define WINDOW_SIZE	2024
+# define WINDOW_SIZE	1024
 # define NUM_THREADS	20	
 # define NUM_PALETTE	16
 
@@ -85,6 +85,7 @@ typedef struct			s_window
 	int					changed:1;
 	void				*reset_func;
 	void				*draw_func;
+	char				triangles;
 	struct s_triangle	*tri;
 }						t_window;
 

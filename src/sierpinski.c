@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/13 17:28:46 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:01:48 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void				reset_sierpinski(t_window *win)
 {
 	float	view[3];
 
-	view[0] = 50.0;
+	view[0] = 500.0;
 	view[1] = 0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);
 	win->max_iterations = 2;
 	if (win->tri)
 		del_tri(win->tri);
-	win->tri = start_triangles(win->max_iterations, 30.0, win);
+	win->tri = start_triangles(win->max_iterations, 500.0, win);
 	win->p_offset = 8;
 	win->p_index = 0;
 }
@@ -44,9 +44,9 @@ static void				thread_triangles(void *thread)
 		{
 			if (t->win->keys->q)
 				draw_center(t);
-			draw_normal(t->t1);
-			draw_normal(t->t2);
-			draw_normal(t->t3);
+			draw_triangles(t->t1);
+			draw_triangles(t->t2);
+			draw_triangles(t->t3);
 		}
 	}
 	del_thread(th);
@@ -77,9 +77,9 @@ void					draw_triangles(t_riangle *t)
 			}
 			else
 			{
-				draw_normal(t->t1);
-				draw_normal(t->t2);
-				draw_normal(t->t3);
+				draw_triangles(t->t1);
+				draw_triangles(t->t2);
+				draw_triangles(t->t3);
 			}
 		}
 	}		
@@ -100,6 +100,7 @@ void					sierpinski(void)
 	reset_sierpinski(win);
 	win->reset_func = reset_sierpinski;
 	win->draw_func = redraw_sierpinski;
+	win->triangles = 1;
 	init_hooks(win, 0);
 	mlx_loop(win->mlx);
 }

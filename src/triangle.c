@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 06:30:02 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/13 17:28:39 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:02:38 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_riangle	*init_tri(unsigned char i, t_xy *p[3], t_window *win)
 {
-	printf("NEWTRI (%f,%f) (%f,%f) (%f,%f)\n", p[0]->x, p[0]->y, p[1]->x, p[1]->y,  p[2]->x, p[2]->y); 
-
 	t_riangle	*t;
 
 	t = (t_riangle*)malloc(sizeof(t_riangle));
