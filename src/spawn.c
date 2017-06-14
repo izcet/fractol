@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 20:31:33 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 23:42:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:51:44 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void	spawn(char *str)
 			badjulia();
 		if (equals(str, "sierpinski"))
 			sierpinski();
-/*		if (equals(str, "apollonian"))
-			apollonian();
-		if (equals(str, "dragon"))
-			dragon();
-		if (equals(str, "pinwheel"))
-			pinwheel();*/
+		if (equals(str, "mandelcube"))
+			mandelcube();
+		if (equals(str, "juliacube"))
+			juliacube();
 		ft_error("Valid fractal is not spawnable?");
 		_exit(0);
 	}

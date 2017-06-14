@@ -1,54 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   juliacube.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:37:51 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:43:58 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+#define W 		WINDOW_SIZE
+#define D		double
+#define HALFWIN	(win->size * 0.5)
+#define juliacube_X (((D)win->mous->x - (D)(WINDOW_SIZE / 2)) / (D)W)
+#define juliacube_Y (((D)win->mous->y - (D)(WINDOW_SIZE / 2))/ (D)W)
 
-static void				reset_mandelbrot(t_window *win)
+static void				reset_juliacube(t_window *win)
 {
 	float	view[3];
 
-	view[0] = 2.8;
-	view[1] = -0.65;
+	view[0] = 3.0;
+	view[1] = 0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);
-	win->max_iterations = 24;
-	win->p_offset = 0;
-	win->p_index = 4;
+	win->max_iterations = 32;
+	win->p_offset = 8;
+	win->p_index = 0;
 }
 
-static unsigned char	man_compute_point(t_window *win, double re, double im)
+static unsigned char	jul_cp(t_window *win, double re, double im,
+		double x, double y)
 {
 	unsigned char	i;
-	double			x;
-	double			y;
 	double			temp;
 
 	i = 0;
-	x = 0.0;
-	y = 0.0;
-	re = ((re / WINDOW_SIZE) * win->size) + win->center_x - (win->size * 0.5);
-	im = ((im / WINDOW_SIZE) * win->size) + win->center_y - (win->size * 0.5);
+	x = ((x / W) * win->size) + win->center_x - (win->size * 0.5);
+	y = ((y / W) * win->size) + win->center_y - (win->size * 0.5);
 	while ((i < win->max_iterations) && ((x * x) + (y * y) < 4))
 	{
-		temp = (x * x) - (y * y) + re;
-		y = (2 * x * y) + im;
+		temp = (x * x * x) - (y * y * x) - (2 * x * y * y) + re;
+		y = (3 * x * x * y) - (y * y * y) + im;
 		x = temp;
 		i++;
 	}
 	return (i);
 }
 
-static void				man_compute_rows(void *thread)
+static void				jul_compute_rows(void *thread)
 {
 	t_thread		*t;
 	t_window		*win;
@@ -58,13 +60,13 @@ static void				man_compute_rows(void *thread)
 
 	t = (t_thread*)thread;
 	win = t->win;
-	y = ((WINDOW_SIZE / NUM_THREADS) * t->num) - 1;
-	while (++y < ((WINDOW_SIZE / NUM_THREADS) * (t->num + 1)))
+	y = ((W / NUM_THREADS) * t->num) - 1;
+	while (++y < ((W / NUM_THREADS) * (t->num + 1)))
 	{
 		x = -1;
-		while (++x < WINDOW_SIZE)
+		while (++x < W)
 		{
-			i = man_compute_point(win, x, y);
+			i = jul_cp(win, juliacube_X, juliacube_Y, x, y);
 			if (i < win->max_iterations)
 			{
 				i = select_color(win, i);
@@ -75,7 +77,7 @@ static void				man_compute_rows(void *thread)
 	del_thread(t);
 }
 
-static void				redraw_mandelbrot(t_window *win)
+static void				redraw_juliacube(t_window *win)
 {
 	int		i;
 	pthread_t	threads[NUM_THREADS];
@@ -83,7 +85,7 @@ static void				redraw_mandelbrot(t_window *win)
 	i = 0;
 	while (i < NUM_THREADS)
 	{
-		threads[i] = make_thread(win, i, (void*)man_compute_rows);
+		threads[i] = make_thread(win, i, (void*)jul_compute_rows);
 		i++;
 	}
 	i = 0;
@@ -92,14 +94,14 @@ static void				redraw_mandelbrot(t_window *win)
 	use_image(win);
 }
 
-void					mandelbrot(void)
+void					juliacube(void)
 {
 	t_window	*win;
 
-	win = init_window("Mandelbrot");
-	reset_mandelbrot(win);
-	win->reset_func = reset_mandelbrot;
-	win->draw_func = redraw_mandelbrot;
-	init_hooks(win, 0);
+	win = init_window("juliacube");
+	reset_juliacube(win);
+	win->reset_func = reset_juliacube;
+	win->draw_func = redraw_juliacube;
+	init_hooks(win, 1);
 	mlx_loop(win->mlx);
 }

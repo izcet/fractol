@@ -6,11 +6,19 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/09 23:42:11 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:51:51 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** Fractals I wanted to add
+**
+** Apollonian Gasket - apollonian
+** Dragon Curve - dragon
+** Pinwheel Triangles - pinwheel
+*/
 
 static void	available_fractals(void)
 {
@@ -19,9 +27,8 @@ static void	available_fractals(void)
 	ft_putendl(" - julia");
 	ft_putendl(" - badjulia");
 	ft_putendl(" - sierpinski");
-	/*	ft_putendl(" - apollonian"); // curves/circles?
-		ft_putendl(" - dragon");
-		ft_putendl(" - pinwheel");*/
+	ft_putendl(" - mandelcube");
+	ft_putendl(" - juliacube");
 }
 
 static void	fractol_error(char *str)
@@ -33,8 +40,6 @@ static void	fractol_error(char *str)
 
 static int	is_valid(char *str)
 {
-	//	ft_putstr("Checking validity of ");
-	//	ft_putendl(str);
 	if (equals(str, "mandelbrot"))
 		return (1);
 	if (equals(str, "julia"))
@@ -43,12 +48,10 @@ static int	is_valid(char *str)
 		return (1);
 	if (equals(str, "sierpinski"))
 		return (1);
-	/*	if (equals(str, "apollonian"))
+	if (equals(str, "mandelcube"))
 		return (1);
-		if (equals(str, "dragon"))
+	if (equals(str, "juliacube"))
 		return (1);
-		if (equals(str, "pinwheel"))
-		return (1);*/
 	return (0);
 }
 

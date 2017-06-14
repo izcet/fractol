@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   mandelcube.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 22:46:00 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 00:37:51 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 00:38:15 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 
-static void				reset_mandelbrot(t_window *win)
+static void				reset_mandelcube(t_window *win)
 {
 	float	view[3];
 
 	view[0] = 2.8;
-	view[1] = -0.65;
+	view[1] = -0.0;
 	view[2] = 0.0;
 	set_window_view(win, view);
 	win->max_iterations = 24;
-	win->p_offset = 0;
-	win->p_index = 4;
+	win->p_offset = 5;
+	win->p_index = 9;
 }
 
 static unsigned char	man_compute_point(t_window *win, double re, double im)
@@ -40,8 +40,8 @@ static unsigned char	man_compute_point(t_window *win, double re, double im)
 	im = ((im / WINDOW_SIZE) * win->size) + win->center_y - (win->size * 0.5);
 	while ((i < win->max_iterations) && ((x * x) + (y * y) < 4))
 	{
-		temp = (x * x) - (y * y) + re;
-		y = (2 * x * y) + im;
+		temp = (x * x * x) - (y * x * y) - (2 * x * y * y) + re;
+		y = (3 * x * x * y) - (y * y * y) + im;
 		x = temp;
 		i++;
 	}
@@ -75,7 +75,7 @@ static void				man_compute_rows(void *thread)
 	del_thread(t);
 }
 
-static void				redraw_mandelbrot(t_window *win)
+static void				redraw_mandelcube(t_window *win)
 {
 	int		i;
 	pthread_t	threads[NUM_THREADS];
@@ -92,14 +92,14 @@ static void				redraw_mandelbrot(t_window *win)
 	use_image(win);
 }
 
-void					mandelbrot(void)
+void					mandelcube(void)
 {
 	t_window	*win;
 
-	win = init_window("Mandelbrot");
-	reset_mandelbrot(win);
-	win->reset_func = reset_mandelbrot;
-	win->draw_func = redraw_mandelbrot;
+	win = init_window("mandelcube");
+	reset_mandelcube(win);
+	win->reset_func = reset_mandelcube;
+	win->draw_func = redraw_mandelcube;
 	init_hooks(win, 0);
 	mlx_loop(win->mlx);
 }
