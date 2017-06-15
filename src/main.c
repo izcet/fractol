@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 14:54:18 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 17:56:52 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@
 
 static void	available_fractals(void)
 {
-	ft_putendl("The available fractals are:");
+	ft_putendl("\nThe available fractals are:");
 	ft_putendl(" - mandelbrot");
 	ft_putendl(" - julia");
 	ft_putendl(" - badjulia");
 	ft_putendl(" - sierpinski");
 	ft_putendl(" - mandelcube");
 	ft_putendl(" - juliacube");
+	ft_putendl("");
 }
 
 static void	fractol_error(char *str)
 {
-	ft_putstr_fd("\nError: \"", 2);
+	ft_putstr_fd("Error: \"", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\" is not a valid fractal.\n", 2);
 }
@@ -66,6 +67,7 @@ int			main(int argc, char **argv)
 	i = 0;
 	error = 0;
 	type = (int*)malloc(sizeof(argc - 1));
+	ft_putendl("");
 	while (++i < argc)
 	{
 		ft_strtolower(argv[i]);

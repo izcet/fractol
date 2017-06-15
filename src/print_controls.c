@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 17:56:40 by irhett            #+#    #+#             */
-/*   Updated: 2017/06/14 15:00:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/06/14 17:57:00 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	basic_type(int *type, int n, int i, char breaker)
 	{
 		if (type[i++] > 0)
 		{
-			ft_putendl("\nBasic Controls:");
+			ft_putendl("Basic Controls:");
 			ft_putendl(" - Scroll up/down to zoom in/out");
 			ft_putendl(" - Left click to increase iterations");
 			ft_putendl(" - Right click to decrease iterations");
@@ -61,4 +61,5 @@ void		print_controls(int *type, int n)
 	julia_type(type, n, 0, 0);
 	sierp_type(type, n, 0, 0);
 	ft_putendl("");
+	free(type);
 }
