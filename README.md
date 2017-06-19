@@ -64,6 +64,7 @@ Any and all of these can be adjusted live in combination with each other.
 - (Julia Type Only) Live recalculate the fractol based on the mouse position.
 - (Julia Type Only) Freeze / Resume motion.
 - (Sierpinski Only) Display all steps, not just the last iteration.
+![Sierpinski All Iterations](https://raw.githubusercontent.com/izcet/fractol/master/pics/sierpinskiall.png)
 <br>
 
 #### Tools used to generate the colors
