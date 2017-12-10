@@ -6,6 +6,7 @@ _The running executable, not this readme._
 A fractol visualization project as part of the core curriculum at 42. It uses multithreading and a custom OpenGL library to calculate and render images.
 The current source will compile on MacOS El Capitan, although a zip of the sources for compiling on X11 systems is included.
 <br>
+GIFS!:
 [X](https://media.giphy.com/media/26Ff2r1ns9qtwXWeI/giphy.gif) 
 [X](https://media.giphy.com/media/3ohjV3RU7T0U61Jio0/giphy.gif) 
 [X](https://media.giphy.com/media/xT1Ra32KJxhOTwxeE0/giphy.gif) 
