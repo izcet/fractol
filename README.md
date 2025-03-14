@@ -1,7 +1,3 @@
-# **WARNING: This may potentially trigger seizures for people with photosensitive epilepsy. Viewer discretion is advised.**
-_The running executable, not this readme._
-<br>
-
 ## Fractol
 A fractol visualization project as part of the core curriculum at 42. It uses multithreading and a custom OpenGL library to calculate and render images.
 The current source will compile on MacOS El Capitan, although a zip of the sources for compiling on X11 systems is included.
